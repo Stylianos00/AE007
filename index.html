@@ -101,8 +101,8 @@ html,body{font-family:"DM Sans",sans-serif;background:var(--navy);color:var(--wh
 .cnum.done{background:rgba(29,158,117,0.2);color:var(--teal3)}
 .cnum.curr{background:rgba(24,95,165,0.2);color:var(--blue3)}
 .ctitle{font-size:12px;font-weight:500;line-height:1.4;margin-bottom:2px}
-#mesCatMount .citem.yli-mesitis-unit .ctitle,
-#qmCatMount .citem.yli-mesitis-unit .ctitle{font-size:16px;font-weight:600;line-height:1.35}
+#praCatMount .citem.yli-agent-unit .ctitle,
+#qmPraCatMount .citem.yli-agent-unit .ctitle{font-size:16px;font-weight:600;line-height:1.35}
 .csub{font-size:10px;color:var(--muted)}
 /* CHAPTER VIEW */
 .chap-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}
@@ -169,7 +169,7 @@ canvas{width:100%;display:block}
 .r72big{font-family:"DM Serif Display",serif;font-size:72px;line-height:1;color:var(--teal3);margin:20px 0 6px;transition:all .3s}
 /* QUIZ */
 .quiz-screen-title{font-family:"DM Serif Display",serif;font-size:24px;margin-bottom:20px;color:var(--white);letter-spacing:0.02em}
-.quiz-mode-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px;align-items:stretch}
+.quiz-mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;align-items:stretch}
 .quiz-mode-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:20px;cursor:pointer;transition:border-color .25s,background .25s,box-shadow .25s;min-width:0;
   box-shadow:
     0 8px 28px rgba(0,0,0,0.32),
@@ -178,21 +178,21 @@ canvas{width:100%;display:block}
 .quiz-mode-card:hover{border-color:var(--teal);background:rgba(29,158,117,0.08)}
 .quiz-mode-card h3{font-size:14px;margin-bottom:6px;color:var(--white)}
 .quiz-mode-card p{font-size:11px;color:var(--muted);line-height:1.5}
-.quiz-mode-card.mesiti{border-color:rgba(24,95,165,0.35)}
-.quiz-mode-card.mesiti:hover{border-color:var(--blue2);background:rgba(24,95,165,0.1)}
 .quiz-mode-card.quiz-mode-selected-ul{border-color:rgba(29,158,117,0.75);
   box-shadow:
     0 8px 28px rgba(0,0,0,0.32),
     0 2px 10px rgba(0,0,0,0.2),
     0 0 0 2px rgba(29,158,117,0.55),
     inset 0 1px 0 rgba(255,255,255,0.08)}
-.quiz-mode-card.quiz-mode-selected-mesiti{border-color:rgba(55,138,221,0.85);
+.quiz-mode-card.praktoras{border-color:rgba(186,117,23,0.4)}
+.quiz-mode-card.praktoras:hover{border-color:var(--amber2);background:rgba(186,117,23,0.1)}
+.quiz-mode-card.quiz-mode-selected-praktoras{border-color:rgba(239,159,39,0.9);
   box-shadow:
     0 8px 28px rgba(0,0,0,0.32),
     0 2px 10px rgba(0,0,0,0.2),
-    0 0 0 2px rgba(24,95,165,0.55),
+    0 0 0 2px rgba(186,117,23,0.5),
     inset 0 1px 0 rgba(255,255,255,0.08)}
-.quiz-mode-card.mesiti.quiz-mode-selected-mesiti:hover{border-color:rgba(55,138,221,0.95);background:rgba(24,95,165,0.12)}
+.quiz-mode-card.praktoras.quiz-mode-selected-praktoras:hover{border-color:rgba(250,180,60,0.95);background:rgba(186,117,23,0.12)}
 .quiz-mode-card.quiz-mode-selected-ul:hover{border-color:rgba(45,200,150,0.9);background:rgba(29,158,117,0.1)}
 /* Συνοχή χρώματος: κάρτα λειτουργίας → πλαίσιο επιλογών από κάτω */
 #qCatOpts.quiz-options-accent-ul > .quiz-filters{
@@ -213,25 +213,25 @@ canvas{width:100%;display:block}
     0 4px 18px rgba(0,0,0,0.22),
     0 0 0 1px rgba(29,158,117,0.2),
     inset 0 1px 0 rgba(255,255,255,0.06)}
-#qMesitiOpts.quiz-options-accent-mesiti #qmBrowse{
+#qPraktorasOpts.quiz-options-accent-praktoras #qmPraBrowse{
   padding:14px 16px 16px;
   border-radius:14px;
-  border:1px solid rgba(55,138,221,0.55);
-  background:rgba(24,95,165,0.1);
+  border:1px solid rgba(186,117,23,0.55);
+  background:rgba(186,117,23,0.1);
   box-shadow:
     0 8px 28px rgba(0,0,0,0.32),
     0 2px 10px rgba(0,0,0,0.2),
-    0 0 0 2px rgba(24,95,165,0.38),
+    0 0 0 2px rgba(186,117,23,0.35),
     inset 0 1px 0 rgba(255,255,255,0.08)}
-#qMesitiOpts.quiz-options-accent-mesiti #qmMesitiFooter{
+#qPraktorasOpts.quiz-options-accent-praktoras #qmPraktorasFooter{
   margin-top:12px;
   padding:14px 16px;
   border-radius:14px;
-  border:1px solid rgba(55,138,221,0.5);
-  background:rgba(24,95,165,0.08);
+  border:1px solid rgba(186,117,23,0.5);
+  background:rgba(186,117,23,0.08);
   box-shadow:
     0 4px 18px rgba(0,0,0,0.22),
-    0 0 0 1px rgba(24,95,165,0.22),
+    0 0 0 1px rgba(186,117,23,0.2),
     inset 0 1px 0 rgba(255,255,255,0.06)}
 .quiz-filters{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px}
 .quiz-filters label{display:block;font-size:11px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
@@ -250,8 +250,8 @@ canvas{width:100%;display:block}
 .quiz-chapter-menu-row .quiz-chapter-item{flex:1;min-width:0;text-align:left}
 .quiz-chapter-menu-row .quiz-chapter-done-cb{flex:0 0 auto;width:18px;height:18px;margin:0 6px 0 0;cursor:pointer;accent-color:var(--teal3)}
 .quiz-chapter-menu-row .quiz-chapter-done-spacer{flex:0 0 auto;width:18px;height:18px;margin:0 6px 0 0;visibility:hidden;pointer-events:none}
-#qmMesUnitMenu .quiz-chapter-menu-row .quiz-chapter-done-cb,
-#mesUnitMenu .quiz-chapter-menu-row .quiz-chapter-done-cb{accent-color:var(--blue2)}
+#qmPraUnitMenu .quiz-chapter-menu-row .quiz-chapter-done-cb,
+#praUnitMenu .quiz-chapter-menu-row .quiz-chapter-done-cb{accent-color:var(--amber2)}
 .quiz-chapter-count{flex:0 0 auto;font-size:14px;font-weight:500;color:var(--teal3);white-space:nowrap;min-height:1.4em}
 .quiz-loading{text-align:center;padding:40px 20px;color:var(--muted)}
 .quiz-load-err{background:rgba(153,60,29,0.15);border:1px solid rgba(153,60,29,0.3);border-radius:12px;padding:16px;margin-bottom:16px;color:var(--coral3);font-size:14px}
@@ -437,7 +437,6 @@ html[data-time-theme="day"] .ex-card,
 html[data-time-theme="day"] .gloss-item{
   box-shadow:0 1px 3px rgba(30,50,40,0.06);
 }
-html[data-time-theme="day"] .quiz-mode-card.mesiti:hover{border-color:var(--blue2);background:rgba(24,95,165,0.08)}
 html[data-time-theme="day"] .quiz-mode-card{
   box-shadow:
     0 6px 22px rgba(30,50,40,0.09),
@@ -449,11 +448,12 @@ html[data-time-theme="day"] .quiz-mode-card.quiz-mode-selected-ul{
     0 2px 8px rgba(30,50,40,0.06),
     0 0 0 2px rgba(29,158,117,0.45),
     inset 0 1px 0 rgba(255,255,255,0.75)}
-html[data-time-theme="day"] .quiz-mode-card.quiz-mode-selected-mesiti{
+html[data-time-theme="day"] .quiz-mode-card.praktoras:hover{border-color:var(--amber2);background:rgba(186,117,23,0.07)}
+html[data-time-theme="day"] .quiz-mode-card.quiz-mode-selected-praktoras{
   box-shadow:
     0 6px 22px rgba(30,50,40,0.1),
     0 2px 8px rgba(30,50,40,0.06),
-    0 0 0 2px rgba(24,95,165,0.42),
+    0 0 0 2px rgba(186,117,23,0.45),
     inset 0 1px 0 rgba(255,255,255,0.75)}
 html[data-time-theme="day"] #qCatOpts.quiz-options-accent-ul > .quiz-filters{
   border-color:rgba(29,158,117,0.55);
@@ -467,18 +467,18 @@ html[data-time-theme="day"] #qCatOpts.quiz-options-accent-ul > div:nth-child(2){
   border-color:rgba(29,158,117,0.4);
   background:rgba(29,158,117,0.06);
   box-shadow:0 2px 10px rgba(30,50,40,0.06),0 0 0 1px rgba(29,158,117,0.18),inset 0 1px 0 rgba(255,255,255,0.65)}
-html[data-time-theme="day"] #qMesitiOpts.quiz-options-accent-mesiti #qmBrowse{
-  border-color:rgba(55,138,221,0.45);
-  background:rgba(24,95,165,0.06);
+html[data-time-theme="day"] #qPraktorasOpts.quiz-options-accent-praktoras #qmPraBrowse{
+  border-color:rgba(186,117,23,0.45);
+  background:rgba(186,117,23,0.06);
   box-shadow:
     0 6px 22px rgba(30,50,40,0.09),
     0 2px 8px rgba(30,50,40,0.06),
-    0 0 0 2px rgba(24,95,165,0.32),
+    0 0 0 2px rgba(186,117,23,0.32),
     inset 0 1px 0 rgba(255,255,255,0.75)}
-html[data-time-theme="day"] #qMesitiOpts.quiz-options-accent-mesiti #qmMesitiFooter{
-  border-color:rgba(55,138,221,0.42);
-  background:rgba(24,95,165,0.05);
-  box-shadow:0 2px 10px rgba(30,50,40,0.06),0 0 0 1px rgba(24,95,165,0.16),inset 0 1px 0 rgba(255,255,255,0.65)}
+html[data-time-theme="day"] #qPraktorasOpts.quiz-options-accent-praktoras #qmPraktorasFooter{
+  border-color:rgba(186,117,23,0.4);
+  background:rgba(186,117,23,0.05);
+  box-shadow:0 2px 10px rgba(30,50,40,0.06),0 0 0 1px rgba(186,117,23,0.16),inset 0 1px 0 rgba(255,255,255,0.65)}
 html[data-time-theme="day"] .citem{background:rgba(255,255,255,0.65);border-color:var(--border)}
 html[data-time-theme="day"] .citem:hover{background:#fff;border-color:rgba(29,158,117,0.25)}
 html[data-time-theme="day"] input[type=range]{background:rgba(0,0,0,0.08)}
@@ -490,8 +490,8 @@ html[data-time-theme="day"] .quiz-chapter-trigger,
 html[data-time-theme="day"] .quiz-chapter-menu{background:var(--navy3);color:var(--white);border-color:var(--border)}
 html[data-time-theme="day"] .quiz-chapter-item:hover,
 html[data-time-theme="day"] .quiz-chapter-item:focus{background:rgba(0,0,0,0.06);color:var(--white)}
-#mesUnitMenu .quiz-chapter-item.yli-mesitis-unit,
-#qmMesUnitMenu .quiz-chapter-item.yli-mesitis-unit{font-size:15px;font-weight:600;line-height:1.35}
+#praUnitMenu .quiz-chapter-item.yli-agent-unit,
+#qmPraUnitMenu .quiz-chapter-item.yli-agent-unit{font-size:15px;font-weight:600;line-height:1.35}
 html[data-time-theme="day"] .opt{background:rgba(255,255,255,0.7);border-color:rgba(0,0,0,0.1);color:var(--gray)}
 html[data-time-theme="day"] .opt:hover:not(.dis){border-color:rgba(29,158,117,0.35);background:#fff;color:var(--white)}
 html[data-time-theme="day"] .opt.ok{border-color:var(--teal2);box-shadow:0 0 0 2px rgba(15,110,86,0.25)}
@@ -634,17 +634,17 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
     <div class="stat-card"><div class="stat-num" id="statPartCount" style="color:var(--amber3)">4</div><div class="stat-lbl">Ενότητες</div></div>
   </div>
   <div class="slbl">Ενότητες Μαθήματος</div>
-  <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:-6px 0 14px">Οι τέσσερις ενότητες οργανώνουν την ύλη και τα κεφάλαια· το <strong>Quiz</strong> (tab Αρχική) είναι Unit Linked ΤτΕ. Ο <strong>μεσίτης ασφαλίσεων</strong> είναι στην <strong>κάρτα Μεσίτης</strong> και <strong>στην πρώτη οθόνη του Ερωτηματολογίου</strong> (πλαίσιο με το 🛡️).</p>
+  <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:-6px 0 14px">Οι τέσσερις ενότητες οργανώνουν την ύλη και τα κεφάλαια· το <strong>Quiz</strong> (tab Αρχική) περιλαμβάνει Unit Linked ΤτΕ και την τράπεζα <strong>ασφαλιστικού πράκτορα</strong>.</p>
   <div class="pgrid">
     <div class="pcard" onclick="go('chapters')"><div class="picon teal">Α</div><div class="badge teal">Μέρος Α</div><div class="pname">Φιλοσοφία Αξίας</div><div class="pdesc">Αξία, επιτόκιο, χρόνος</div></div>
     <div class="pcard" onclick="go('chapters')"><div class="picon blue">Β</div><div class="badge blue">Μέρος Β</div><div class="pname">Μαθηματικά Εργαλεία</div><div class="pdesc">Τύποι, ράντες, NPV, IRR</div></div>
     <div class="pcard" onclick="go('chapters')"><div class="picon amber">Γ</div><div class="badge amber">Μέρος Γ</div><div class="pname">Αγορά &amp; Προϊόντα</div><div class="pdesc">Ομόλογα, μετοχές, Unit-Linked</div></div>
     <div class="pcard" onclick="go('chapters')"><div class="picon coral">Δ</div><div class="badge coral">Μέρος Δ</div><div class="pname">Κανονιστικό Πλαίσιο</div><div class="pdesc">KID, IDD, Solvency II</div></div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
     <div class="card" style="cursor:pointer;grid-column:1/-1" onclick="go('calc')"><div style="font-size:18px;margin-bottom:8px">⚡</div><div style="font-size:15px;font-weight:500;margin-bottom:4px">Εργαλεία &amp; αναφορά</div><div style="font-size:11px;color:var(--muted)">Υπολογιστές live · τύποι ανά εργαλείο · κάτω (άνοιγμα) πλήρης πίνακας, χάρτης, 10 ασκήσεις, γλωσσάριο</div></div>
-    <div class="card" style="cursor:pointer;min-width:0" onclick="go('quiz')"><div style="font-size:18px;margin-bottom:8px">📝</div><div style="font-size:15px;font-weight:500;margin-bottom:4px">Quiz · Unit Linked</div><div style="font-size:11px;color:var(--muted)">608 θέματα · κείμενο όπως στην τράπεζα ΤτΕ (Unit Linked FINAL)</div></div>
-    <div class="card" style="cursor:pointer;min-width:0;border-color:rgba(24,95,165,0.35)" onclick="go('mesiti')"><div style="font-size:18px;margin-bottom:8px">🛡️</div><div style="font-size:15px;font-weight:500;margin-bottom:4px">Μεσίτης ασφαλίσεων</div><div style="font-size:11px;color:var(--muted)">Τράπεζα θεμάτων ΤτΕ (ξεχωριστά από κεφαλαιαγορά &amp; Unit Linked quiz)</div></div>
+    <div class="card" style="cursor:pointer;min-width:0" onclick="go('quiz')"><div style="font-size:18px;margin-bottom:8px">📝</div><div style="font-size:15px;font-weight:500;margin-bottom:4px">Quiz · Unit Linked</div><div style="font-size:11px;color:var(--muted)">608 θέματα · Τράπεζα ΤτΕ</div></div>
+    <div class="card" style="cursor:pointer;min-width:0;border-color:rgba(186,117,23,0.4)" onclick="go('praktoras')"><div style="font-size:18px;margin-bottom:8px">📋</div><div style="font-size:15px;font-weight:500;margin-bottom:4px">Ασφαλιστικός πράκτορας</div><div style="font-size:11px;color:var(--muted)">600 θέματα ΤτΕ · πιστοποίηση πράκτορα (χωριστή τράπεζα)</div></div>
   </div>
 </div>
 
@@ -884,13 +884,13 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
   <!-- Quiz start: choose mode -->
   <div id="qStart">
     <div class="quiz-mode-grid">
-      <div id="quizModeCardMesiti" class="quiz-mode-card mesiti" role="button" tabindex="0" aria-pressed="false" onclick="startMesitiMode()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startMesitiMode()}">
-        <h3>🛡️ Μεσίτης ασφαλίσεων</h3>
-        <p>Τράπεζα θεμάτων από ΕτΕ</p>
+      <div id="quizModeCardPraktoras" class="quiz-mode-card praktoras" role="button" tabindex="0" aria-pressed="false" onclick="startPraktorasMode()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startPraktorasMode()}">
+        <h3>📋 Ασφαλιστικός πράκτορας</h3>
+        <p>600 θέματα · Τράπεζα ΤτΕ</p>
       </div>
       <div id="quizModeCardUl" class="quiz-mode-card" role="button" tabindex="0" aria-pressed="false" onclick="startQuizMode()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startQuizMode()}">
         <h3>📂 Unit Linked</h3>
-        <p>Τράπεζα θεμάτων από ΕτΕ</p>
+        <p>608 θέματα · Τράπεζα ΤτΕ</p>
       </div>
     </div>
     <div id="qCatOpts" style="display:none;margin-top:16px">
@@ -917,46 +917,46 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
         <button class="btn-s" onclick="cancelQuizCatOpts()">Ακύρωση</button>
       </div>
     </div>
-    <div id="qMesitiOpts" style="display:none;margin-top:16px">
-      <div id="qmBrowse">
-        <div id="qmLoadErr" class="quiz-load-err" style="display:none"></div>
-        <div id="qmMesUnitPickerPanel" class="quiz-filters" style="display:none;margin-bottom:20px;padding:16px 18px;border-radius:14px;border:1px solid var(--border);background:var(--navy2)">
+    <div id="qPraktorasOpts" style="display:none;margin-top:16px">
+      <div id="qmPraBrowse">
+        <div id="qmPraLoadErr" class="quiz-load-err" style="display:none"></div>
+        <div id="qmPraUnitPickerPanel" class="quiz-filters" style="display:none;margin-bottom:20px;padding:16px 18px;border-radius:14px;border:1px solid var(--border);background:var(--navy2)">
           <div class="quiz-chapter-row">
-            <div class="quiz-chapter-wrap" id="qmMesUnitWrap">
-              <select id="qmMesUnitSel" class="quiz-cat-sr" tabindex="-1" aria-hidden="true"></select>
-              <button type="button" class="quiz-chapter-trigger" id="qmMesUnitTrigger" aria-expanded="false" aria-haspopup="listbox" aria-controls="qmMesUnitMenu">ΕΠΙΛΕΞΤΕ ΕΝΟΤΗΤΑ</button>
-              <div class="quiz-chapter-menu" id="qmMesUnitMenu" role="listbox" hidden></div>
+            <div class="quiz-chapter-wrap" id="qmPraUnitWrap">
+              <select id="qmPraUnitSel" class="quiz-cat-sr" tabindex="-1" aria-hidden="true"></select>
+              <button type="button" class="quiz-chapter-trigger" id="qmPraUnitTrigger" aria-expanded="false" aria-haspopup="listbox" aria-controls="qmPraUnitMenu">ΕΠΙΛΕΞΤΕ ΕΝΟΤΗΤΑ</button>
+              <div class="quiz-chapter-menu" id="qmPraUnitMenu" role="listbox" hidden></div>
             </div>
-            <span id="qmMesUnitCount" class="quiz-chapter-count" role="status" aria-live="polite">—</span>
+            <span id="qmPraUnitCount" class="quiz-chapter-count" role="status" aria-live="polite">—</span>
           </div>
           <label class="quiz-check" style="display:flex;align-items:center;gap:8px;margin-top:10px;cursor:pointer;font-size:15px">
-            <input type="checkbox" id="qmMesShuffleQ" checked>
+            <input type="checkbox" id="qmPraShuffleQ" checked>
             Τυχαία σειρά ερωτήσεων
           </label>
           <label class="quiz-check" style="display:flex;align-items:center;gap:8px;margin-top:6px;cursor:pointer;font-size:15px">
-            <input type="checkbox" id="qmMesShuffleAns">
+            <input type="checkbox" id="qmPraShuffleAns">
             Τυχαία σειρά απαντήσεων
           </label>
         </div>
-        <div id="qmCatMount" class="parts-list"></div>
+        <div id="qmPraCatMount" class="parts-list"></div>
       </div>
-      <div id="qmMesRun" style="display:none">
-        <div class="yli-run-title quiz-screen-title" id="qmMesRunTitle" style="font-size:20px;margin-bottom:8px"></div>
-        <p class="quiz-hint" id="qmMesRunHint" style="margin-bottom:16px;font-size:12px"></p>
+      <div id="qmPraRun" style="display:none">
+        <div class="yli-run-title quiz-screen-title" id="qmPraRunTitle" style="font-size:20px;margin-bottom:8px"></div>
+        <p class="quiz-hint" id="qmPraRunHint" style="margin-bottom:16px;font-size:12px"></p>
         <div class="qprow">
-          <div class="qpbar" style="flex:1"><div class="qpfill" id="qmFill" style="width:0%"></div></div>
-          <div class="qplbl" id="qmLbl">1/1</div>
+          <div class="qpbar" style="flex:1"><div class="qpfill" id="qmPraFill" style="width:0%"></div></div>
+          <div class="qplbl" id="qmPraLbl">1/1</div>
         </div>
-        <div id="qmArea"></div>
-        <div class="qnav" id="qmMesNav">
-          <button type="button" class="btn-s" id="qmNavPrev" onclick="yliPrev()" style="display:none">← Προηγούμενο</button>
-          <button type="button" class="btn-p" id="qmNavNext" onclick="yliNext()" style="display:none">Επόμενο →</button>
-          <button type="button" class="btn-s" id="qmMesNavExit" onclick="mesitiQuizYliExit()">Έξοδος</button>
+        <div id="qmPraArea"></div>
+        <div class="qnav" id="qmPraNav">
+          <button type="button" class="btn-s" id="qmPraNavPrev" onclick="yliPrev()" style="display:none">← Προηγούμενο</button>
+          <button type="button" class="btn-p" id="qmPraNavNext" onclick="yliNext()" style="display:none">Επόμενο →</button>
+          <button type="button" class="btn-s" id="qmPraNavExit" onclick="insuranceQuizYliExit()">Έξοδος</button>
         </div>
       </div>
-      <div id="qmMesitiFooter" style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center">
-        <button type="button" class="btn-p" onclick="openMesitisSelectedFromPicker('q')">Έναρξη Εξάσκησης</button>
-        <button type="button" class="btn-s" onclick="cancelMesitiQuizOpts()">Ακύρωση</button>
+      <div id="qmPraktorasFooter" style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center">
+        <button type="button" class="btn-p" onclick="openPraktorasSelectedFromPicker('q')">Έναρξη Εξάσκησης</button>
+        <button type="button" class="btn-s" onclick="cancelPraktorasQuizOpts()">Ακύρωση</button>
       </div>
     </div>
   </div>
@@ -987,53 +987,53 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
   </div>
 </div>
 
-<!-- Ύλη μεσίτη ασφαλίσεων (insurance_yli · πηγή Excel: Τραπεζα Ελλαδος/Mesitis/) -->
-<div id="s-mesiti" class="screen">
-  <div id="mesBrowse">
-    <div class="quiz-screen-title">Μεσίτης ασφαλίσεων</div>
-    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px">Τράπεζα θεμάτων για το πιστοποιητικό επαγγελματικών γνώσεων <strong>μεσίτη ασφαλίσεων και αντασφαλίσεων</strong> (ΤτΕ). Δεν εντάσσεται στην ύλη κεφαλαιαγοράς. Οι 601 ερωτήσεις ομαδοποιούνται σε <strong>θεματικά κεφάλαια</strong> (συνοχή περιεχομένου)· υπάρχει και επιλογή για <strong>όλο το ερωτηματολόγιο</strong> με τη σειρά του αρχείου.</p>
-    <div id="mesLoadErr" class="quiz-load-err" style="display:none"></div>
-    <div id="mesUnitPickerPanel" class="quiz-filters" style="display:none;margin-bottom:20px;padding:16px 18px;border-radius:14px;border:1px solid var(--border);background:var(--navy2)">
+<!-- Ύλη ασφαλιστικού πράκτορα (insurance_agent_yli · πηγή Excel: Τραπεζα Ελλαδος/Praktoras/) -->
+<div id="s-praktoras" class="screen">
+  <div id="praBrowse">
+    <div class="quiz-screen-title">Ασφαλιστικός πράκτορας</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px">Τράπεζα θεμάτων για το πιστοποιητικό επαγγελματικών γνώσεων <strong>ασφαλιστικού πράκτορα</strong> (ΤτΕ). Οι 600 ερωτήσεις ομαδοποιούνται σε <strong>θεματικά κεφάλαια</strong>· υπάρχει και επιλογή για <strong>όλο το ερωτηματολόγιο</strong> με τη σειρά του αρχείου.</p>
+    <div id="praLoadErr" class="quiz-load-err" style="display:none"></div>
+    <div id="praUnitPickerPanel" class="quiz-filters" style="display:none;margin-bottom:20px;padding:16px 18px;border-radius:14px;border:1px solid var(--border);background:var(--navy2)">
       <div class="quiz-chapter-row">
-        <div class="quiz-chapter-wrap" id="mesUnitWrap">
-          <select id="mesUnitSel" class="quiz-cat-sr" tabindex="-1" aria-hidden="true"></select>
-          <button type="button" class="quiz-chapter-trigger" id="mesUnitTrigger" aria-expanded="false" aria-haspopup="listbox" aria-controls="mesUnitMenu">ΕΠΙΛΕΞΤΕ ΕΝΟΤΗΤΑ</button>
-          <div class="quiz-chapter-menu" id="mesUnitMenu" role="listbox" hidden></div>
+        <div class="quiz-chapter-wrap" id="praUnitWrap">
+          <select id="praUnitSel" class="quiz-cat-sr" tabindex="-1" aria-hidden="true"></select>
+          <button type="button" class="quiz-chapter-trigger" id="praUnitTrigger" aria-expanded="false" aria-haspopup="listbox" aria-controls="praUnitMenu">ΕΠΙΛΕΞΤΕ ΕΝΟΤΗΤΑ</button>
+          <div class="quiz-chapter-menu" id="praUnitMenu" role="listbox" hidden></div>
         </div>
-        <span id="mesUnitCount" class="quiz-chapter-count" role="status" aria-live="polite">—</span>
+        <span id="praUnitCount" class="quiz-chapter-count" role="status" aria-live="polite">—</span>
       </div>
       <label class="quiz-check" style="display:flex;align-items:center;gap:8px;margin-top:10px;cursor:pointer;font-size:15px">
-        <input type="checkbox" id="mesShuffleQ" checked>
+        <input type="checkbox" id="praShuffleQ" checked>
         Τυχαία σειρά ερωτήσεων
       </label>
       <label class="quiz-check" style="display:flex;align-items:center;gap:8px;margin-top:6px;cursor:pointer;font-size:15px">
-        <input type="checkbox" id="mesShuffleAns">
+        <input type="checkbox" id="praShuffleAns">
         Τυχαία σειρά απαντήσεων
       </label>
-      <button type="button" class="btn-p" style="margin-top:12px" onclick="openMesitisSelectedFromPicker('s')">Έναρξη Εξάσκησης</button>
+      <button type="button" class="btn-p" style="margin-top:12px" onclick="openPraktorasSelectedFromPicker('s')">Έναρξη Εξάσκησης</button>
     </div>
-    <div id="mesCatMount" class="parts-list"></div>
+    <div id="praCatMount" class="parts-list"></div>
   </div>
-  <div id="mesRun" style="display:none">
-    <div class="yli-run-title quiz-screen-title" id="mesRunTitle" style="font-size:20px;margin-bottom:8px"></div>
-    <p class="quiz-hint" id="mesRunHint" style="margin-bottom:16px;font-size:12px"></p>
+  <div id="praRun" style="display:none">
+    <div class="yli-run-title quiz-screen-title" id="praRunTitle" style="font-size:20px;margin-bottom:8px"></div>
+    <p class="quiz-hint" id="praRunHint" style="margin-bottom:16px;font-size:12px"></p>
     <div class="qprow">
-      <div class="qpbar" style="flex:1"><div class="qpfill" id="mesFill" style="width:0%"></div></div>
-      <div class="qplbl" id="mesLbl">1/1</div>
+      <div class="qpbar" style="flex:1"><div class="qpfill" id="praFill" style="width:0%"></div></div>
+      <div class="qplbl" id="praLbl">1/1</div>
     </div>
-    <div id="mesArea"></div>
-    <div class="qnav" id="mesNav">
+    <div id="praArea"></div>
+    <div class="qnav" id="praNav">
       <button type="button" class="btn-s" onclick="yliBackToBrowse()">← Κατάλογος</button>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button type="button" class="btn-s" id="mesNavPrev" onclick="yliPrev()" style="display:none">← Προηγούμενο</button>
-        <button type="button" class="btn-p" id="mesNavNext" onclick="yliNext()" style="display:none">Επόμενο →</button>
+        <button type="button" class="btn-s" id="praNavPrev" onclick="yliPrev()" style="display:none">← Προηγούμενο</button>
+        <button type="button" class="btn-p" id="praNavNext" onclick="yliNext()" style="display:none">Επόμενο →</button>
       </div>
     </div>
   </div>
 </div>
 </div>
 <script>
-/* Στυλιανός — AE007: έκδοση επίδειξης· απλούστερη από την πλήρη εφαρμογή. */
+/* Στυλιανός — AE007: έκδοση επίδειξης· Unit Linked + πράκτορας (χωρίς μεσίτη / χωρίς ύλη κεφαλαιαγοράς). */
 const CHAPS=[
   {id:0,t:"Τι Είναι Αξία και Πού Γεννιέται",p:"Α",c:"teal",steps:[
     {l:"Αρχή",t:"Η Αρχαία Αντίρρηση",h:`<p>Ο Αριστοτέλης έγραψε ότι το χρήμα είναι <strong style="color:var(--teal3)">στείρο</strong>. Η σύγχρονη θεωρία απάντησε:</p><div class="fbox"><div class="fbox-main">Ο χρόνος και η αβεβαιότητα έχουν τιμή</div><div class="fbox-sub">Ο τόκος αποζημιώνει για στέρηση σήμερα και κίνδυνο αύριο</div></div>`},
@@ -1159,40 +1159,40 @@ function htmlEsc(s){
   /* Stylianos — ασφαλής εμφάνιση κειμένου στο HTML */
   return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
-const YLI_CTX_INS={
-  basePath:"insurance_yli/",
+const YLI_CTX_AGENT={
+  basePath:"insurance_agent_yli/",
   manifest:null,list:[],idx:0,ans:{},
-  pidPrefix:"mes-p-",
+  pidPrefix:"pra-p-",
   ids:{
-    browse:"mesBrowse",loadErr:"mesLoadErr",catMount:"mesCatMount",
-    run:"mesRun",runTitle:"mesRunTitle",runHint:"mesRunHint",
-    fill:"mesFill",lbl:"mesLbl",area:"mesArea",fb:"mesFb",
-    navPrev:"mesNavPrev",navNext:"mesNavNext"
+    browse:"praBrowse",loadErr:"praLoadErr",catMount:"praCatMount",
+    run:"praRun",runTitle:"praRunTitle",runHint:"praRunHint",
+    fill:"praFill",lbl:"praLbl",area:"praArea",fb:"praFb",
+    navPrev:"praNavPrev",navNext:"praNavNext"
   },
   pick:{
-    panel:"mesUnitPickerPanel",sel:"mesUnitSel",trigger:"mesUnitTrigger",menu:"mesUnitMenu",
-    count:"mesUnitCount",wrap:"mesUnitWrap",which:"s"
+    panel:"praUnitPickerPanel",sel:"praUnitSel",trigger:"praUnitTrigger",menu:"praUnitMenu",
+    count:"praUnitCount",wrap:"praUnitWrap",which:"s"
   },
-  errManifestHtml:'Δεν φορτώθηκε το <code>insurance_yli/manifest.json</code>. Τρέξε <code>npm run build:insurance-yli</code>.'
+  errManifestHtml:'Δεν φορτώθηκε το <code>insurance_agent_yli/manifest.json</code>. Τρέξε <code>npm run build:insurance-agent-yli</code> και <code>python3 scripts/tag-praktoras-chapters.py</code>.'
 };
-const YLI_CTX_INS_QUIZ={
-  basePath:"insurance_yli/",
+const YLI_CTX_AGENT_QUIZ={
+  basePath:"insurance_agent_yli/",
   manifest:null,list:[],idx:0,ans:{},
-  pidPrefix:"mes-qm-",
+  pidPrefix:"pra-qm-",
   ids:{
-    browse:"qmBrowse",loadErr:"qmLoadErr",catMount:"qmCatMount",
-    run:"qmMesRun",runTitle:"qmMesRunTitle",runHint:"qmMesRunHint",
-    fill:"qmFill",lbl:"qmLbl",area:"qmArea",fb:"qmFb",
-    navPrev:"qmNavPrev",navNext:"qmNavNext"
+    browse:"qmPraBrowse",loadErr:"qmPraLoadErr",catMount:"qmPraCatMount",
+    run:"qmPraRun",runTitle:"qmPraRunTitle",runHint:"qmPraRunHint",
+    fill:"qmPraFill",lbl:"qmPraLbl",area:"qmPraArea",fb:"qmPraFb",
+    navPrev:"qmPraNavPrev",navNext:"qmPraNavNext"
   },
   pick:{
-    panel:"qmMesUnitPickerPanel",sel:"qmMesUnitSel",trigger:"qmMesUnitTrigger",menu:"qmMesUnitMenu",
-    count:"qmMesUnitCount",wrap:"qmMesUnitWrap",which:"q"
+    panel:"qmPraUnitPickerPanel",sel:"qmPraUnitSel",trigger:"qmPraUnitTrigger",menu:"qmPraUnitMenu",
+    count:"qmPraUnitCount",wrap:"qmPraUnitWrap",which:"q"
   },
-  errManifestHtml:YLI_CTX_INS.errManifestHtml
+  errManifestHtml:YLI_CTX_AGENT.errManifestHtml
 };
-let yliAct=YLI_CTX_INS;
-let MESITIS_UNIT_PICK_ROWS=[];
+let yliAct=YLI_CTX_AGENT;
+let PRA_UNIT_PICK_ROWS=[];
 const THEME_KEY="axiaXronou_time_theme_v1";
 const THEME_MANUAL_TS_KEY="axiaXronou_time_theme_manual_ts_v1";
 const THEME_MANUAL_MS=3600000;
@@ -1370,9 +1370,9 @@ function refreshChaptersUI(){
 }
 
 function go(name){
-  /* Στυλιανός — εδώ γίνεται η εναλλαγή οθονών (χωρίς καρτέλα «Ύλη» κεφαλαιαγοράς). */
+  /* Στυλιανός — εναλλαγή οθονών (χωρίς καρτέλα «Ύλη» κεφαλαιαγοράς). */
   if(name==="appendices")name="calc";
-  ["home","chapters","chapter","calc","quiz","mesiti"].forEach(s=>{const el=document.getElementById("s-"+s);if(el)el.classList.remove("active");});
+  ["home","chapters","chapter","calc","quiz","praktoras"].forEach(s=>{const el=document.getElementById("s-"+s);if(el)el.classList.remove("active");});
   document.querySelectorAll(".nav-tab").forEach((t,i)=>{
     const map={quiz:0};
     const idx=map[name];
@@ -1384,7 +1384,7 @@ function go(name){
   if(name==="chapters")setTimeout(refreshChaptersUI,0);
   if(name==="calc")setTimeout(runCalcScreenInit,50);
   if(name==="quiz"){showQuizStart();if(!QBANK)loadQuestionBank();}
-  if(name==="mesiti"){yliAct=YLI_CTX_INS;showYliBrowse();loadYliManifestIfNeeded();}
+  if(name==="praktoras"){yliAct=YLI_CTX_AGENT;showYliBrowse();loadYliManifestIfNeeded();}
 }
 
 function toggleP(id){
@@ -1741,8 +1741,8 @@ function compareChapterCodes(a,b){
 const CAT_CHAPTER_PROMPT_VALUE="__prompt__";
 const LS_UL_CHAPTER_READ="axiaXronou_ul_chapter_read_v1";
 const LS_UL_CHAPTER_LAST="axiaXronou_ul_chapter_last_v1";
-const LS_MES_UNIT_READ="axiaXronou_mesitis_unit_read_v1";
-const LS_MES_UNIT_LAST_IDX="axiaXronou_mesitis_unit_last_idx_v1";
+const LS_PRA_UNIT_READ="axiaXronou_praktoras_unit_read_v1";
+const LS_PRA_UNIT_LAST_IDX="axiaXronou_praktoras_unit_last_idx_v1";
 function ulChapterReadMap(){
   try{return JSON.parse(localStorage.getItem(LS_UL_CHAPTER_READ)||"{}");}catch(e){return{};}
 }
@@ -1752,15 +1752,15 @@ function ulChapterSetRead(code,on){
   localStorage.setItem(LS_UL_CHAPTER_READ,JSON.stringify(m));
 }
 function ulChapterIsRead(code){return !!ulChapterReadMap()[code];}
-function mesUnitReadMap(){
-  try{return JSON.parse(localStorage.getItem(LS_MES_UNIT_READ)||"{}");}catch(e){return{};}
+function praUnitReadMap(){
+  try{return JSON.parse(localStorage.getItem(LS_PRA_UNIT_READ)||"{}");}catch(e){return{};}
 }
-function mesUnitSetRead(title,on){
-  const m=mesUnitReadMap();
+function praUnitSetRead(title,on){
+  const m=praUnitReadMap();
   if(on)m[title]=1;else delete m[title];
-  localStorage.setItem(LS_MES_UNIT_READ,JSON.stringify(m));
+  localStorage.setItem(LS_PRA_UNIT_READ,JSON.stringify(m));
 }
-function mesUnitIsRead(title){return !!mesUnitReadMap()[title];}
+function praUnitIsRead(title){return !!praUnitReadMap()[title];}
 
 function formatQuestionCount(n){
   return n===1?"1 ερώτηση":n+" ερωτήσεις";
@@ -1839,8 +1839,7 @@ function catChapterPickerKey(e){
   if(e.key!=="Escape")return;
   const menu=document.getElementById("catChapterMenu");
   if(menu&&!menu.hidden)closeCatChapterMenu();
-  const mesM=document.getElementById("mesUnitMenu");
-  if(mesM&&!mesM.hidden)closeMesUnitMenu();
+  closeMesUnitMenu();
 }
 
 function initCatChapterPicker(){
@@ -1935,32 +1934,32 @@ function populateChapterSelect(){
 
 function setQuizModeSelection(mode){
   const ul=document.getElementById("quizModeCardUl");
-  const ms=document.getElementById("quizModeCardMesiti");
+  const pr=document.getElementById("quizModeCardPraktoras");
   const catOpts=document.getElementById("qCatOpts");
-  const mesOpts=document.getElementById("qMesitiOpts");
+  const praOpts=document.getElementById("qPraktorasOpts");
   if(catOpts){
     catOpts.classList.remove("quiz-options-accent-ul");
   }
-  if(mesOpts){
-    mesOpts.classList.remove("quiz-options-accent-mesiti");
+  if(praOpts){
+    praOpts.classList.remove("quiz-options-accent-praktoras");
   }
   if(ul){
     ul.classList.remove("quiz-mode-selected-ul");
     ul.setAttribute("aria-pressed","false");
   }
-  if(ms){
-    ms.classList.remove("quiz-mode-selected-mesiti");
-    ms.setAttribute("aria-pressed","false");
+  if(pr){
+    pr.classList.remove("quiz-mode-selected-praktoras");
+    pr.setAttribute("aria-pressed","false");
   }
   if(mode==="ul"&&ul){
     ul.classList.add("quiz-mode-selected-ul");
     ul.setAttribute("aria-pressed","true");
     if(catOpts)catOpts.classList.add("quiz-options-accent-ul");
   }
-  if(mode==="mesiti"&&ms){
-    ms.classList.add("quiz-mode-selected-mesiti");
-    ms.setAttribute("aria-pressed","true");
-    if(mesOpts)mesOpts.classList.add("quiz-options-accent-mesiti");
+  if(mode==="praktoras"&&pr){
+    pr.classList.add("quiz-mode-selected-praktoras");
+    pr.setAttribute("aria-pressed","true");
+    if(praOpts)praOpts.classList.add("quiz-options-accent-praktoras");
   }
 }
 
@@ -1969,31 +1968,31 @@ function cancelQuizCatOpts(){
   setQuizModeSelection(null);
 }
 
-function resetQuizMesitiBrowseState(){
+function resetQuizPraktorasBrowseState(){
   const g=document.querySelector("#s-quiz .quiz-mode-grid");
   if(g)g.style.display="";
   const saved=yliAct;
-  yliAct=YLI_CTX_INS_QUIZ;
+  yliAct=YLI_CTX_AGENT_QUIZ;
   showYliBrowse();
-  YLI_CTX_INS_QUIZ.list=[];YLI_CTX_INS_QUIZ.idx=0;
-  for(const k of Object.keys(YLI_CTX_INS_QUIZ.ans))delete YLI_CTX_INS_QUIZ.ans[k];
-  YLI_CTX_INS_QUIZ.optOrderByIdx={};
-  YLI_CTX_INS_QUIZ.shuffleAns=false;
-  YLI_CTX_INS_QUIZ._mesShuffledQ=false;
+  YLI_CTX_AGENT_QUIZ.list=[];YLI_CTX_AGENT_QUIZ.idx=0;
+  for(const k of Object.keys(YLI_CTX_AGENT_QUIZ.ans))delete YLI_CTX_AGENT_QUIZ.ans[k];
+  YLI_CTX_AGENT_QUIZ.optOrderByIdx={};
+  YLI_CTX_AGENT_QUIZ.shuffleAns=false;
+  YLI_CTX_AGENT_QUIZ._mesShuffledQ=false;
   yliAct=saved;
 }
 
-function cancelMesitiQuizOpts(){
-  resetQuizMesitiBrowseState();
-  document.getElementById("qMesitiOpts").style.display="none";
+function cancelPraktorasQuizOpts(){
+  resetQuizPraktorasBrowseState();
+  document.getElementById("qPraktorasOpts").style.display="none";
   setQuizModeSelection(null);
 }
 
-function startMesitiMode(){
-  setQuizModeSelection("mesiti");
+function startPraktorasMode(){
+  setQuizModeSelection("praktoras");
   document.getElementById("qCatOpts").style.display="none";
-  document.getElementById("qMesitiOpts").style.display="block";
-  yliAct=YLI_CTX_INS_QUIZ;
+  document.getElementById("qPraktorasOpts").style.display="block";
+  yliAct=YLI_CTX_AGENT_QUIZ;
   loadYliManifestIfNeeded();
 }
 
@@ -2002,14 +2001,14 @@ function showQuizStart(){
   document.getElementById("qRun").style.display="none";
   document.getElementById("qRes").style.display="none";
   document.getElementById("qCatOpts").style.display="none";
-  document.getElementById("qMesitiOpts").style.display="none";
-  resetQuizMesitiBrowseState();
+  document.getElementById("qPraktorasOpts").style.display="none";
+  resetQuizPraktorasBrowseState();
   setQuizModeSelection(null);
 }
 
 function startQuizMode(){
-  document.getElementById("qMesitiOpts").style.display="none";
-  resetQuizMesitiBrowseState();
+  document.getElementById("qPraktorasOpts").style.display="none";
+  resetQuizPraktorasBrowseState();
   setQuizModeSelection("ul");
   document.getElementById("qCatOpts").style.display="block";
   updateCatChapterCount();
@@ -2201,18 +2200,23 @@ function quizExit(){
   if(confirm("Θέλεις να τερματίσεις το ερωτηματολόγιο; Τα αποτελέσματα θα υπολογιστούν μέχρι τις απαντήσεις που έδωσες."))finishQuiz();
 }
 
-function mesitiQuizYliExit(){
-  if(yliAct!==YLI_CTX_INS_QUIZ)return;
+function insuranceQuizYliExit(){
+  if(yliAct!==YLI_CTX_AGENT_QUIZ)return;
   if(!confirm("Θέλεις να τερματίσεις την εξάσκηση; Θα επιστρέψεις στην επιλογή ενότητας."))return;
+  yliTtsChainActive=false;
+  if(yliTtsPlaying){ttsUserStopYli();yliTtsPlaying=false;}
   yliBackToBrowse();
 }
 
-/* ——— Μεσίτης / εξάσκηση: insurance_yli/ (AE007) ——— */
-function insuranceMesCtx(ctx){
-  return ctx===YLI_CTX_INS||ctx===YLI_CTX_INS_QUIZ;
+/* ——— Ασφαλιστικός πράκτορας: insurance_agent_yli/ (AE007) ——— */
+function insuranceAgentCtx(ctx){
+  return ctx===YLI_CTX_AGENT||ctx===YLI_CTX_AGENT_QUIZ;
 }
-function syncInsuranceManifestRef(data){
-  YLI_CTX_INS.manifest=YLI_CTX_INS_QUIZ.manifest=data;
+function insuranceAuxCtx(ctx){
+  return insuranceAgentCtx(ctx);
+}
+function syncAgentManifestRef(data){
+  YLI_CTX_AGENT.manifest=YLI_CTX_AGENT_QUIZ.manifest=data;
 }
 let activeMesMenuCfg=null;
 function yliEsc(s){return htmlEsc(s);}
@@ -2226,19 +2230,19 @@ function showYliBrowse(){
   const br=document.getElementById(id.browse),rn=document.getElementById(id.run);
   if(br)br.style.display="block";
   if(rn)rn.style.display="none";
-  if(yliAct===YLI_CTX_INS_QUIZ){
-    const foot=document.getElementById("qmMesitiFooter");
+  if(yliAct===YLI_CTX_AGENT_QUIZ){
+    const foot=document.getElementById("qmPraktorasFooter");
     if(foot)foot.style.display="flex";
   }
 }
 
 async function loadYliManifestIfNeeded(){
-  /* Στυλιανός — μόνο insurance_yli· δεν φορτώνει yli/ κεφαλαιαγοράς. */
+  /* Στυλιανός — μόνο insurance_agent_yli. */
   const errEl=document.getElementById(yliAct.ids.loadErr);
   if(errEl){errEl.style.display="none";errEl.textContent="";}
-  const shared=YLI_CTX_INS.manifest||YLI_CTX_INS_QUIZ.manifest;
+  const shared=YLI_CTX_AGENT.manifest||YLI_CTX_AGENT_QUIZ.manifest;
   if(shared){
-    syncInsuranceManifestRef(shared);
+    syncAgentManifestRef(shared);
     yliAct.manifest=shared;
     renderYliCategories();
     return;
@@ -2247,7 +2251,7 @@ async function loadYliManifestIfNeeded(){
     const r=await fetch(yliAct.basePath+yliFetchPath("manifest.json"));
     if(!r.ok)throw new Error(r.status+" "+r.statusText);
     const data=await r.json();
-    syncInsuranceManifestRef(data);
+    syncAgentManifestRef(data);
     yliAct.manifest=data;
     renderYliCategories();
   }catch(e){
@@ -2258,17 +2262,16 @@ async function loadYliManifestIfNeeded(){
   }
 }
 
-function mesitis601ExpandRows(f){
+function insuranceBankExpandRows(f){
   const n=Number(f.questionCount)||0;
-  if(n!==601)return null;
   const rows=[];
   const catalog=f.chapterCatalog;
   if(catalog&&catalog.length){
     rows.push({
       json:f.json,
-      title:"Όλο το ερωτηματολόγιο — 601 ερωτήσεις",
+      title:`Όλο το ερωτηματολόγιο — ${n} ερωτήσεις`,
       sub:`Από το «${f.title}» · πλήρης τράπεζα`,
-      count:601,
+      count:n,
       sliceStart:null,
       sliceLen:null,
       chapterId:null
@@ -2282,11 +2285,12 @@ function mesitis601ExpandRows(f){
         sliceStart:null,
         sliceLen:null,
         chapterId:ch.id,
-        mesitisUnit:true
+        unitChapter:true
       });
     }
     return rows;
   }
+  if(n!==601)return null;
   rows.push({
     json:f.json,
     title:"Όλο το ερωτηματολόγιο — 601 ερωτήσεις",
@@ -2305,7 +2309,7 @@ function mesitis601ExpandRows(f){
       count:25,
       sliceStart:u*25,
       sliceLen:25,
-      mesitisUnit:true
+      unitChapter:true
     });
   }
   rows.push({
@@ -2315,7 +2319,7 @@ function mesitis601ExpandRows(f){
     count:26,
     sliceStart:575,
     sliceLen:26,
-    mesitisUnit:true
+    unitChapter:true
   });
   return rows;
 }
@@ -2324,9 +2328,19 @@ function yliBrowseRowsForCategory(ctx,cat){
   const rows=[];
   for(const f of cat.files||[]){
     const n=Number(f.questionCount)||0;
-    if(insuranceMesCtx(ctx)&&n===601){
-      const exp=mesitis601ExpandRows(f);
+    if(insuranceAuxCtx(ctx)){
+      const exp=insuranceBankExpandRows(f);
       if(exp)rows.push(...exp);
+      else{
+        rows.push({
+          json:f.json,
+          title:f.title,
+          sub:`${f.sheetCount} φύλλα`,
+          count:n,
+          sliceStart:null,
+          sliceLen:null
+        });
+      }
     }else{
       rows.push({
         json:f.json,
@@ -2346,7 +2360,7 @@ function yliBrowseRowHtml(r){
   const s0=r.sliceStart==null?"null":String(r.sliceStart);
   const s1=r.sliceLen==null?"null":String(r.sliceLen);
   const cid=r.chapterId==null||r.chapterId===undefined?"null":JSON.stringify(String(r.chapterId));
-  const unitCls=r.mesitisUnit?" yli-mesitis-unit":"";
+  const unitCls=r.unitChapter?" yli-agent-unit":"";
   return `<div class="citem${unitCls}" role="button" tabindex="0" onclick='openYliFile(${j},${t},${s0},${s1},${cid})' onkeydown="if(event.key==='Enter'||event.key===' ')openYliFile(${j},${t},${s0},${s1},${cid})"><div class="cnum">${r.count}</div><div><div class="ctitle">${yliEsc(r.title)}</div><div class="csub">${yliEsc(r.sub)}</div></div></div>`;
 }
 
@@ -2354,7 +2368,7 @@ function renderYliCategories(){
   const ctx=yliAct;
   const mount=document.getElementById(ctx.ids.catMount);
   if(!mount||!ctx.manifest||!ctx.manifest.categories){
-    if(insuranceMesCtx(ctx)&&ctx.pick){
+    if(insuranceAgentCtx(ctx)&&ctx.pick){
       const pp=document.getElementById(ctx.pick.panel);
       if(pp)pp.style.display="none";
     }
@@ -2364,11 +2378,11 @@ function renderYliCategories(){
   for(const cat of ctx.manifest.categories){
     for(const r of yliBrowseRowsForCategory(ctx,cat))flat.push(yliBrowseRowHtml(r));
   }
-  mount.innerHTML=`<div class="cgrid mes-cat-flat">${flat.join("")}</div>`;
-  populateMesitisUnitPicker();
+  mount.innerHTML=`<div class="cgrid agent-cat-flat">${flat.join("")}</div>`;
+  populatePraktorasUnitPicker();
 }
 
-function formatMesitisQuestionCount(n){
+function formatAgentQuestionCount(n){
   return n===1?"1 ερώτηση":n+" ερωτήσεις";
 }
 
@@ -2409,14 +2423,32 @@ function toggleMesUnitMenuPair(e,cfg){
   else closeMesUnitMenu();
 }
 
-function setMesUnitCountForIndex(i,pick){
-  const out=document.getElementById(pick.count);
-  if(!out)return;
-  if(!Number.isFinite(i)||i<0||i>=MESITIS_UNIT_PICK_ROWS.length){out.textContent="—";return;}
-  out.textContent=formatMesitisQuestionCount(MESITIS_UNIT_PICK_ROWS[i].count);
+const PRA_PICK_BIND=[YLI_CTX_AGENT.pick,YLI_CTX_AGENT_QUIZ.pick];
+
+function findPraktoras600File(manifest){
+  if(!manifest||!manifest.categories)return null;
+  for(const cat of manifest.categories){
+    for(const f of cat.files||[]){
+      const n=Number(f.questionCount)||0;
+      if(n===600&&f.chapterCatalog&&f.chapterCatalog.length)return f;
+    }
+  }
+  for(const cat of manifest.categories){
+    for(const f of cat.files||[]){
+      if(Number(f.questionCount)===600)return f;
+    }
+  }
+  return null;
 }
 
-function syncMesUnitTriggerLabel(pick){
+function setPraUnitCountForIndex(i,pick){
+  const out=document.getElementById(pick.count);
+  if(!out)return;
+  if(!Number.isFinite(i)||i<0||i>=PRA_UNIT_PICK_ROWS.length){out.textContent="—";return;}
+  out.textContent=formatAgentQuestionCount(PRA_UNIT_PICK_ROWS[i].count);
+}
+
+function syncPraUnitTriggerLabel(pick){
   const sel=document.getElementById(pick.sel);
   const trig=document.getElementById(pick.trigger);
   if(!sel||!trig)return;
@@ -2425,7 +2457,7 @@ function syncMesUnitTriggerLabel(pick){
   trig.textContent=opt?opt.textContent:"ΕΠΙΛΕΞΤΕ ΕΝΟΤΗΤΑ";
 }
 
-function refreshMesUnitAriaSelected(pick){
+function refreshPraUnitAriaSelected(pick){
   const sel=document.getElementById(pick.sel);
   const menu=document.getElementById(pick.menu);
   if(!sel||!menu)return;
@@ -2435,29 +2467,27 @@ function refreshMesUnitAriaSelected(pick){
   });
 }
 
-const MES_PICK_BIND=[YLI_CTX_INS.pick,YLI_CTX_INS_QUIZ.pick];
-
-function initMesitisUnitPicker(){
-  MES_PICK_BIND.forEach(cfg=>{
+function initPraktorasUnitPicker(){
+  PRA_PICK_BIND.forEach(cfg=>{
     const trig=document.getElementById(cfg.trigger);
     const menu=document.getElementById(cfg.menu);
-    if(trig&&!trig.dataset.mesBound){
-      trig.dataset.mesBound="1";
+    if(trig&&!trig.dataset.praBound){
+      trig.dataset.praBound="1";
       trig.addEventListener("click",e=>toggleMesUnitMenuPair(e,cfg));
     }
-    if(menu&&!menu.dataset.mesLeave){
-      menu.dataset.mesLeave="1";
+    if(menu&&!menu.dataset.praLeave){
+      menu.dataset.praLeave="1";
       menu.addEventListener("mouseleave",()=>{
         const sel=document.getElementById(cfg.sel);
         const c=document.getElementById(cfg.count);
-        if(sel&&sel.value!==""&&MESITIS_UNIT_PICK_ROWS[+sel.value])setMesUnitCountForIndex(+sel.value,cfg);
+        if(sel&&sel.value!==""&&PRA_UNIT_PICK_ROWS[+sel.value])setPraUnitCountForIndex(+sel.value,cfg);
         else if(c)c.textContent="—";
       });
       menu.addEventListener("focusout",e=>{
         if(!menu.contains(e.relatedTarget)){
           const sel=document.getElementById(cfg.sel);
           const c=document.getElementById(cfg.count);
-          if(sel&&sel.value!==""&&MESITIS_UNIT_PICK_ROWS[+sel.value])setMesUnitCountForIndex(+sel.value,cfg);
+          if(sel&&sel.value!==""&&PRA_UNIT_PICK_ROWS[+sel.value])setPraUnitCountForIndex(+sel.value,cfg);
           else if(c)c.textContent="—";
         }
       });
@@ -2465,22 +2495,12 @@ function initMesitisUnitPicker(){
   });
 }
 
-function findMesitis601File(manifest){
-  if(!manifest||!manifest.categories)return null;
-  for(const cat of manifest.categories){
-    for(const f of cat.files||[]){
-      if(Number(f.questionCount)===601)return f;
-    }
-  }
-  return null;
-}
-
-function populateMesitisUnitPicker(){
-  const man=YLI_CTX_INS.manifest||YLI_CTX_INS_QUIZ.manifest;
-  const file=findMesitis601File(man);
+function populatePraktorasUnitPicker(){
+  const man=YLI_CTX_AGENT.manifest||YLI_CTX_AGENT_QUIZ.manifest;
+  const file=findPraktoras600File(man);
   if(!file){
-    MESITIS_UNIT_PICK_ROWS=[];
-    MES_PICK_BIND.forEach(p=>{
+    PRA_UNIT_PICK_ROWS=[];
+    PRA_PICK_BIND.forEach(p=>{
       const pan=document.getElementById(p.panel);
       if(pan)pan.style.display="none";
       const c=document.getElementById(p.count);
@@ -2488,8 +2508,8 @@ function populateMesitisUnitPicker(){
     });
     return;
   }
-  MESITIS_UNIT_PICK_ROWS=mesitis601ExpandRows(file)||[];
-  MES_PICK_BIND.forEach(pick=>{
+  PRA_UNIT_PICK_ROWS=insuranceBankExpandRows(file)||[];
+  PRA_PICK_BIND.forEach(pick=>{
     const panel=document.getElementById(pick.panel);
     if(panel)panel.style.display="block";
     const sel=document.getElementById(pick.sel);
@@ -2500,37 +2520,37 @@ function populateMesitisUnitPicker(){
     oPrompt.value="";
     oPrompt.textContent="ΕΠΙΛΕΞΤΕ ΕΝΟΤΗΤΑ";
     sel.appendChild(oPrompt);
-    MESITIS_UNIT_PICK_ROWS.forEach((r,i)=>{
+    PRA_UNIT_PICK_ROWS.forEach((r,i)=>{
       const o=document.createElement("option");
       o.value=String(i);
       o.textContent=r.title;
       sel.appendChild(o);
     });
-    const lastIdx=localStorage.getItem(LS_MES_UNIT_LAST_IDX);
-    if(lastIdx!==null&&lastIdx!==""&&MESITIS_UNIT_PICK_ROWS[+lastIdx])sel.value=lastIdx;
+    const lastIdx=localStorage.getItem(LS_PRA_UNIT_LAST_IDX);
+    if(lastIdx!==null&&lastIdx!==""&&PRA_UNIT_PICK_ROWS[+lastIdx])sel.value=lastIdx;
     else sel.value="";
     menu.innerHTML="";
     const addItem=(idx,label)=>{
-      const r=MESITIS_UNIT_PICK_ROWS[idx];
+      const r=PRA_UNIT_PICK_ROWS[idx];
       const n=r?r.count:0;
       const row=document.createElement("div");
       row.className="quiz-chapter-menu-row";
       const btn=document.createElement("button");
       btn.type="button";
-      btn.className="quiz-chapter-item"+(r&&r.mesitisUnit?" yli-mesitis-unit":"")+(r&&!r.mesitisUnit&&r.count===601?" mesitis-picker-full":"");
+      btn.className="quiz-chapter-item"+(r&&r.unitChapter?" yli-agent-unit":"")+(r&&!r.unitChapter&&(r.count===601||r.count===600)?" agent-picker-full":"");
       btn.setAttribute("role","option");
       btn.dataset.mesIdx=String(idx);
       btn.textContent=label;
-      btn.title=formatMesitisQuestionCount(n);
-      btn.addEventListener("mouseenter",()=>setMesUnitCountForIndex(idx,pick));
-      btn.addEventListener("focus",()=>setMesUnitCountForIndex(idx,pick));
+      btn.title=formatAgentQuestionCount(n);
+      btn.addEventListener("mouseenter",()=>setPraUnitCountForIndex(idx,pick));
+      btn.addEventListener("focus",()=>setPraUnitCountForIndex(idx,pick));
       btn.addEventListener("click",()=>{
         sel.value=String(idx);
-        try{localStorage.setItem(LS_MES_UNIT_LAST_IDX,String(idx));}catch(e){}
-        syncMesUnitTriggerLabel(pick);
-        refreshMesUnitAriaSelected(pick);
+        try{localStorage.setItem(LS_PRA_UNIT_LAST_IDX,String(idx));}catch(e){}
+        syncPraUnitTriggerLabel(pick);
+        refreshPraUnitAriaSelected(pick);
         closeMesUnitMenu();
-        setMesUnitCountForIndex(idx,pick);
+        setPraUnitCountForIndex(idx,pick);
       });
       row.appendChild(btn);
       const cb=document.createElement("input");
@@ -2539,32 +2559,32 @@ function populateMesitisUnitPicker(){
       cb.title="Σημείωση για μένα: το έχω διαβάσει / εξασκήσει";
       cb.setAttribute("aria-label","Σημείωση: ολοκληρώθηκε");
       const markKey=r?r.title:"";
-      cb.checked=!!r&&mesUnitIsRead(markKey);
+      cb.checked=!!r&&praUnitIsRead(markKey);
       cb.addEventListener("click",e=>e.stopPropagation());
-      cb.addEventListener("change",()=>{if(r)mesUnitSetRead(markKey,cb.checked);});
+      cb.addEventListener("change",()=>{if(r)praUnitSetRead(markKey,cb.checked);});
       row.appendChild(cb);
       menu.appendChild(row);
     };
-    MESITIS_UNIT_PICK_ROWS.forEach((r,i)=>addItem(i,r.title));
-    syncMesUnitTriggerLabel(pick);
-    refreshMesUnitAriaSelected(pick);
-    if(MESITIS_UNIT_PICK_ROWS.length&&sel.value!=="")setMesUnitCountForIndex(+sel.value,pick);
+    PRA_UNIT_PICK_ROWS.forEach((r,i)=>addItem(i,r.title));
+    syncPraUnitTriggerLabel(pick);
+    refreshPraUnitAriaSelected(pick);
+    if(PRA_UNIT_PICK_ROWS.length&&sel.value!=="")setPraUnitCountForIndex(+sel.value,pick);
     else document.getElementById(pick.count).textContent="—";
   });
-  initMesitisUnitPicker();
+  initPraktorasUnitPicker();
 }
 
-function openMesitisSelectedFromPicker(which){
+function openPraktorasSelectedFromPicker(which){
   which=which||"s";
-  const pick=which==="q"?YLI_CTX_INS_QUIZ.pick:YLI_CTX_INS.pick;
-  yliAct=which==="q"?YLI_CTX_INS_QUIZ:YLI_CTX_INS;
+  const pick=which==="q"?YLI_CTX_AGENT_QUIZ.pick:YLI_CTX_AGENT.pick;
+  yliAct=which==="q"?YLI_CTX_AGENT_QUIZ:YLI_CTX_AGENT;
   const sel=document.getElementById(pick.sel);
-  if(!sel||!MESITIS_UNIT_PICK_ROWS.length)return;
+  if(!sel||!PRA_UNIT_PICK_ROWS.length)return;
   if(sel.value===""){
     alert("Επίλεξε ενότητα από τη λίστα.");
     return;
   }
-  const r=MESITIS_UNIT_PICK_ROWS[+sel.value];
+  const r=PRA_UNIT_PICK_ROWS[+sel.value];
   if(!r)return;
   openYliFile(r.json,r.title,r.sliceStart,r.sliceLen,r.chapterId);
 }
@@ -2615,11 +2635,12 @@ async function openYliFile(jsonRel,titleLabel,sliceStart,sliceLen,chapterId){
     if(Number.isFinite(ss)&&Number.isFinite(sl)&&sl>0){
       list=list.slice(ss,ss+sl);
     }
-    if(insuranceMesCtx(ctx)){
+    if(insuranceAuxCtx(ctx)){
       ctx.optOrderByIdx={};
       ctx.shuffleAns=false;
       ctx._mesShuffledQ=false;
-      const sid=ctx===YLI_CTX_INS_QUIZ?"qmMes":"mes";
+      let sid="pra";
+      if(ctx===YLI_CTX_AGENT_QUIZ)sid="qmPra";
       const elQ=document.getElementById(sid+"ShuffleQ");
       const elA=document.getElementById(sid+"ShuffleAns");
       const wantQ=elQ&&elQ.checked;
@@ -2649,10 +2670,10 @@ async function openYliFile(jsonRel,titleLabel,sliceStart,sliceLen,chapterId){
     for(const k of Object.keys(ctx.ans))delete ctx.ans[k];
     document.getElementById(id.browse).style.display="none";
     document.getElementById(id.run).style.display="block";
-    if(ctx===YLI_CTX_INS_QUIZ){
+    if(ctx===YLI_CTX_AGENT_QUIZ){
       const g=document.querySelector("#s-quiz .quiz-mode-grid");
       if(g)g.style.display="none";
-      const foot=document.getElementById("qmMesitiFooter");
+      const foot=document.getElementById("qmPraktorasFooter");
       if(foot)foot.style.display="none";
     }
     const hint=data.sourceRelative?`Πηγή: ${yliEsc(data.sourceRelative)}`:"";
@@ -2669,13 +2690,13 @@ async function openYliFile(jsonRel,titleLabel,sliceStart,sliceLen,chapterId){
 function yliBackToBrowse(){
   showYliBrowse();
   const ctx=yliAct;
-  if(ctx===YLI_CTX_INS_QUIZ){
+  if(ctx===YLI_CTX_AGENT_QUIZ){
     const g=document.querySelector("#s-quiz .quiz-mode-grid");
     if(g)g.style.display="";
   }
   ctx.list=[];ctx.idx=0;
   for(const k of Object.keys(ctx.ans))delete ctx.ans[k];
-  if(insuranceMesCtx(ctx)){
+  if(insuranceAuxCtx(ctx)){
     ctx.optOrderByIdx={};
     ctx.shuffleAns=false;
     ctx._mesShuffledQ=false;
@@ -2688,7 +2709,7 @@ function yliOptOrderBase(q){
 function yliOptOrder(q,qIdx){
   const ctx=yliAct;
   const ix=qIdx!=null&&Number.isFinite(qIdx)?qIdx:ctx.idx;
-  if(insuranceMesCtx(ctx)&&ctx.shuffleAns&&ctx.optOrderByIdx&&ctx.optOrderByIdx[ix]){
+  if(insuranceAuxCtx(ctx)&&ctx.shuffleAns&&ctx.optOrderByIdx&&ctx.optOrderByIdx[ix]){
     return ctx.optOrderByIdx[ix];
   }
   return yliOptOrderBase(q);
@@ -2724,7 +2745,7 @@ function yliFeedbackHtml(ok,q,chosenIdx){
 }
 
 function renderYliQ(){
-  /* Στυλιανός — κοινή απόδοση ερώτησης μεσίτη / εξάσκησης, χωρίς εκφώνηση. */
+  /* Στυλιανός — ερώτηση πράκτορα / εξάσκησης, χωρίς εκφώνηση. */
   const ctx=yliAct;
   const id=ctx.ids;
   const area=document.getElementById(id.area),fill=document.getElementById(id.fill),lbl=document.getElementById(id.lbl);
@@ -2739,7 +2760,7 @@ function renderYliQ(){
     const ok=Object.values(ctx.ans).filter(x=>x&&x.ok).length;
     const tot=Object.keys(ctx.ans).length;
     let sub="Ολοκλήρωσες την ανάγνωση αυτού του αρχείου";
-    if(insuranceMesCtx(ctx)){
+    if(insuranceAuxCtx(ctx)){
       const bits=[];
       if(ctx._mesShuffledQ)bits.push("Η σειρά ερωτήσεων ανακατεύτηκε");
       if(ctx.shuffleAns)bits.push("Η σειρά των απαντήσεων ανακατεύτηκε ανά ερώτηση");
