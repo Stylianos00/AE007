@@ -991,7 +991,7 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
 <div id="s-mesiti" class="screen">
   <div id="mesBrowse">
     <div class="quiz-screen-title">Μεσίτης ασφαλίσεων</div>
-    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px">Τράπεζα θεμάτων για το πιστοποιητικό επαγγελματικών γνώσεων <strong>μεσίτη ασφαλίσεων και αντασφαλίσεων</strong> (ΤτΕ). Δεν εντάσσεται στην ύλη κεφαλαιαγοράς. Οι 601 ερωτήσεις χωρίζονται σε <strong>24 ενότητες</strong> (23×25 + 1×26)· υπάρχει και <strong>μία επιλογή</strong> με όλες μαζί, με τη σειρά του αρχείου.</p>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px">Τράπεζα θεμάτων για το πιστοποιητικό επαγγελματικών γνώσεων <strong>μεσίτη ασφαλίσεων και αντασφαλίσεων</strong> (ΤτΕ). Δεν εντάσσεται στην ύλη κεφαλαιαγοράς. Οι 601 ερωτήσεις ομαδοποιούνται σε <strong>θεματικά κεφάλαια</strong> (συνοχή περιεχομένου)· υπάρχει και επιλογή για <strong>όλο το ερωτηματολόγιο</strong> με τη σειρά του αρχείου.</p>
     <div id="mesLoadErr" class="quiz-load-err" style="display:none"></div>
     <div id="mesUnitPickerPanel" class="quiz-filters" style="display:none;margin-bottom:20px;padding:16px 18px;border-radius:14px;border:1px solid var(--border);background:var(--navy2)">
       <div class="quiz-chapter-row">
@@ -2262,13 +2262,39 @@ function mesitis601ExpandRows(f){
   const n=Number(f.questionCount)||0;
   if(n!==601)return null;
   const rows=[];
+  const catalog=f.chapterCatalog;
+  if(catalog&&catalog.length){
+    rows.push({
+      json:f.json,
+      title:"Όλο το ερωτηματολόγιο — 601 ερωτήσεις",
+      sub:`Από το «${f.title}» · πλήρης τράπεζα`,
+      count:601,
+      sliceStart:null,
+      sliceLen:null,
+      chapterId:null
+    });
+    for(const ch of catalog){
+      rows.push({
+        json:f.json,
+        title:ch.title,
+        sub:`${ch.id} · ${ch.count} ερωτήσεις`,
+        count:ch.count,
+        sliceStart:null,
+        sliceLen:null,
+        chapterId:ch.id,
+        mesitisUnit:true
+      });
+    }
+    return rows;
+  }
   rows.push({
     json:f.json,
     title:"Όλο το ερωτηματολόγιο — 601 ερωτήσεις",
     sub:`Από το αρχείο «${f.title}» · πλήρης τράπεζα`,
     count:601,
     sliceStart:null,
-    sliceLen:null
+    sliceLen:null,
+    chapterId:null
   });
   for(let u=0;u<23;u++){
     const a=u*25+1,b=a+24;
@@ -2319,8 +2345,9 @@ function yliBrowseRowHtml(r){
   const j=JSON.stringify(r.json),t=JSON.stringify(r.title);
   const s0=r.sliceStart==null?"null":String(r.sliceStart);
   const s1=r.sliceLen==null?"null":String(r.sliceLen);
+  const cid=r.chapterId==null||r.chapterId===undefined?"null":JSON.stringify(String(r.chapterId));
   const unitCls=r.mesitisUnit?" yli-mesitis-unit":"";
-  return `<div class="citem${unitCls}" role="button" tabindex="0" onclick='openYliFile(${j},${t},${s0},${s1})' onkeydown="if(event.key==='Enter'||event.key===' ')openYliFile(${j},${t},${s0},${s1})"><div class="cnum">${r.count}</div><div><div class="ctitle">${yliEsc(r.title)}</div><div class="csub">${yliEsc(r.sub)}</div></div></div>`;
+  return `<div class="citem${unitCls}" role="button" tabindex="0" onclick='openYliFile(${j},${t},${s0},${s1},${cid})' onkeydown="if(event.key==='Enter'||event.key===' ')openYliFile(${j},${t},${s0},${s1},${cid})"><div class="cnum">${r.count}</div><div><div class="ctitle">${yliEsc(r.title)}</div><div class="csub">${yliEsc(r.sub)}</div></div></div>`;
 }
 
 function renderYliCategories(){
@@ -2539,7 +2566,7 @@ function openMesitisSelectedFromPicker(which){
   }
   const r=MESITIS_UNIT_PICK_ROWS[+sel.value];
   if(!r)return;
-  openYliFile(r.json,r.title,r.sliceStart,r.sliceLen);
+  openYliFile(r.json,r.title,r.sliceStart,r.sliceLen,r.chapterId);
 }
 
 function flattenYliPayload(data){
@@ -2555,25 +2582,34 @@ function flattenYliPayload(data){
         text:(q.text||"").trim(),
         correct:q.correct,
         options:q.options||{},
-        explanation:String(q.explanation||"").trim()
+        explanation:String(q.explanation||"").trim(),
+        chapter:String(q.chapter||"").trim(),
+        topic:String(q.topic||"").trim()
       });
     }
   }
   return out;
 }
 
-async function openYliFile(jsonRel,titleLabel,sliceStart,sliceLen){
+async function openYliFile(jsonRel,titleLabel,sliceStart,sliceLen,chapterId){
   const ctx=yliAct;
   const id=ctx.ids;
   const errEl=document.getElementById(id.loadErr);
   if(errEl)errEl.style.display="none";
   document.getElementById(id.runTitle).textContent=titleLabel||jsonRel;
   const url=ctx.basePath+yliFetchPath(jsonRel);
+  let chapterFilter=null;
+  if(chapterId!=null&&chapterId!==undefined&&chapterId!=="null"&&String(chapterId).length){
+    chapterFilter=String(chapterId);
+  }
   try{
     const r=await fetch(url);
     if(!r.ok)throw new Error(r.status+" "+r.statusText);
     const data=await r.json();
     let list=flattenYliPayload(data);
+    if(chapterFilter){
+      list=list.filter(q=>q.chapter===chapterFilter);
+    }
     const ss=sliceStart==null||sliceStart==="null"?NaN:+sliceStart;
     const sl=sliceLen==null||sliceLen==="null"?NaN:+sliceLen;
     if(Number.isFinite(ss)&&Number.isFinite(sl)&&sl>0){
@@ -2725,6 +2761,7 @@ function renderYliQ(){
   fill.style.width=Math.round(ctx.idx/ctx.list.length*100)+"%";
   lbl.textContent=(ctx.idx+1)+"/"+ctx.list.length;
   const sheetTag=q.sheetName?`<span class="qmetatag">${yliEsc(q.sheetName)}</span>`:"";
+  const chapTag=q.chapter?`<span class="qmetatag" title="${yliEsc(q.topic||q.chapter)}">${yliEsc(q.chapter)}</span>`:"";
   const yliJsonKey=q.id!=null&&String(q.id).length?"id":"n";
   const yliJsonVal=q.id!=null&&String(q.id).length?q.id:q.n;
   const yliIdBadge=yliJsonVal!=null&&String(yliJsonVal).length?`<span class="qjsonid" title="${yliEsc(yliJsonKey==="id"?"Αναγνωριστικό id στο JSON αυτού του αρχείου":"Αριθμός n (σειρά ερώτησης) στο JSON αυτού του αρχείου")}">${yliEsc(String(yliJsonVal))}</span>`:"";
@@ -2739,7 +2776,7 @@ function renderYliQ(){
   const fb=answered?`<div class="fbbox ${prev.ok?"":"ko"}" style="display:block">${yliFeedbackHtml(prev.ok,q,prev.i)}</div>`:`<div class="fbbox" id="${id.fb}"></div>`;
   area.innerHTML=`<div class="qcard">
     <div class="qmeta qmeta-row-split">
-      <div class="qmeta-main">${sheetTag}${yliIdBadge}${headTag}</div>
+      <div class="qmeta-main">${sheetTag}${chapTag}${yliIdBadge}${headTag}</div>
       <div class="qmeta-tts-inline"></div>
     </div>
     <div class="qtag">Ερώτηση ${ctx.idx+1} από ${ctx.list.length} (σειρά αρχείου)</div>

@@ -263,8 +263,8 @@ def main() -> None:
       const nFiles=(cat.files||[]).length;
       const expanded=browseRows.length>nFiles;
       const metaLabel=expanded
-        ? (browseRows.length===25&&nFiles===1&&nq===601
-          ? "πλήρες + 24 ενότητες · 601 ερωτήσεις"
+        ? (browseRows.length>1&&nFiles===1&&nq===601
+          ? "πλήρης τράπεζα + θεματικά κεφάλαια · 601 ερωτήσεις"
           : `${browseRows.length} επιλογές · ${nq} ερωτήσεις`)
         : `${nFiles} αρχεία · ${nq} ερωτήσεις`;
       const rows=browseRows.map(r=>yliBrowseRowHtml(r)).join("");
