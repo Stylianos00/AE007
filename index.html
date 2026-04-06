@@ -1725,17 +1725,37 @@ function loadQuestionBank(){
 }
 
 function chapterSortKey(code){
-  const ul=/^UL-Μ(\d+)$/.exec(code);
-  if(ul)return{grp:0,num:+ul[1]};
+  const ul=/^UL-Μ(\d+)(·(\d+))?$/.exec(code);
+  if(ul){
+    const maj=+ul[1];
+    const sub=ul[3]!=null?+ul[3]:0;
+    return{grp:0,maj,sub};
+  }
   const xr=/^ΧΡΗΜ-Κ(\d+)(½)?$/.exec(code);
   if(xr)return{grp:1,num:+xr[1]+(xr[2]?0.5:0)};
-  return{grp:2,num:0,raw:code};
+  return{grp:2,raw:String(code)};
 }
 function compareChapterCodes(a,b){
   const A=chapterSortKey(a),B=chapterSortKey(b);
   if(A.grp!==B.grp)return A.grp-B.grp;
-  if(A.grp===2)return String(a).localeCompare(String(b),"el");
-  return A.num-B.num;
+  if(A.grp===0){
+    if(A.maj!==B.maj)return A.maj-B.maj;
+    return A.sub-B.sub;
+  }
+  if(A.grp===1)return A.num-B.num;
+  return String(a).localeCompare(String(b),"el");
+}
+function chapterDisplayLabel(id){
+  if(!id)return"";
+  if(!QBANK||!Array.isArray(QBANK.chapterCatalog))return id;
+  const row=QBANK.chapterCatalog.find(x=>x.id===id);
+  if(row&&row.title)return row.title;
+  return id;
+}
+function chapterShortLabel(id){
+  const t=chapterDisplayLabel(id);
+  if(t.length<=52)return t;
+  return t.slice(0,49)+"…";
 }
 
 const CAT_CHAPTER_PROMPT_VALUE="__prompt__";
@@ -1878,7 +1898,7 @@ function populateChapterSelect(){
   chaps.forEach(c=>{
     const o=document.createElement("option");
     o.value=c;
-    o.textContent=c;
+    o.textContent=chapterDisplayLabel(c);
     sel.appendChild(o);
   });
   const last=localStorage.getItem(LS_UL_CHAPTER_LAST);
@@ -1926,7 +1946,7 @@ function populateChapterSelect(){
     menu.appendChild(row);
   };
   addItem("","Όλα τα κεφάλαια",false);
-  chaps.forEach(c=>addItem(c,c,true));
+  chaps.forEach(c=>addItem(c,chapterDisplayLabel(c),true));
   syncCatChapterTriggerLabel();
   refreshCatChapterAriaSelected();
   updateCatChapterCount();
@@ -2142,7 +2162,7 @@ function renderQ(){
   const qidBadge=(q.id!=null&&String(q.id).length)?`<span class="qjsonid" title="${htmlEsc("Αναγνωριστικό id στο αρχείο questions_bank.json")}">${htmlEsc(String(q.id))}</span>`:"";
   document.getElementById("qArea").innerHTML=`<div class="qcard">
     <div class="qmeta qmeta-row-split">
-      <div class="qmeta-main"><span class="qmetatag">${q.chapter||""}</span>${qidBadge}<span class="qmetatag">${q.difficultyStr||""}</span><span class="qmetatag" title="${(q.topic||"").slice(0,80)}">${(q.topic||"").slice(0,30)}${(q.topic||"").length>30?"…":""}</span></div>
+      <div class="qmeta-main"><span class="qmetatag" title="${htmlEsc(q.chapter||"")}">${htmlEsc(chapterShortLabel(q.chapter))}</span>${qidBadge}<span class="qmetatag">${q.difficultyStr||""}</span><span class="qmetatag" title="${(q.topic||"").slice(0,80)}">${(q.topic||"").slice(0,30)}${(q.topic||"").length>30?"…":""}</span></div>
       <div class="qmeta-tts-inline"></div>
     </div>
     <div class="qtag">Ερώτηση ${qIdx+1} από ${qList.length}</div>
