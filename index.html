@@ -250,6 +250,12 @@ canvas{width:100%;display:block}
 .quiz-chapter-menu-row .quiz-chapter-item{flex:1;min-width:0;text-align:left}
 .quiz-chapter-menu-row .quiz-chapter-done-cb{flex:0 0 auto;width:18px;height:18px;margin:0 6px 0 0;cursor:pointer;accent-color:var(--teal3)}
 .quiz-chapter-menu-row .quiz-chapter-done-spacer{flex:0 0 auto;width:18px;height:18px;margin:0 6px 0 0;visibility:hidden;pointer-events:none}
+#catChapterMenu.quiz-chapter-menu{display:flex;flex-direction:column;padding:0;max-height:min(320px,60vh);overflow:hidden}
+#catChapterMenu .quiz-chapter-menu-scroll{overflow-y:auto;min-height:0;flex:1;padding:6px 0}
+#catChapterMenu .quiz-chapter-menu-footer{flex-shrink:0;border-top:1px solid var(--border);padding:8px 12px 10px;font-size:11px;color:var(--muted);line-height:1.45;background:var(--navy2);border-radius:0 0 9px 9px}
+#mesUnitMenu.quiz-chapter-menu,#qmMesUnitMenu.quiz-chapter-menu,#praUnitMenu.quiz-chapter-menu,#qmPraUnitMenu.quiz-chapter-menu{display:flex;flex-direction:column;padding:0;max-height:min(320px,60vh);overflow:hidden}
+#mesUnitMenu .quiz-chapter-menu-scroll,#qmMesUnitMenu .quiz-chapter-menu-scroll,#praUnitMenu .quiz-chapter-menu-scroll,#qmPraUnitMenu .quiz-chapter-menu-scroll{overflow-y:auto;min-height:0;flex:1;padding:6px 0}
+#mesUnitMenu .quiz-chapter-menu-footer,#qmMesUnitMenu .quiz-chapter-menu-footer,#praUnitMenu .quiz-chapter-menu-footer,#qmPraUnitMenu .quiz-chapter-menu-footer{flex-shrink:0;border-top:1px solid var(--border);padding:8px 12px 10px;font-size:11px;color:var(--muted);line-height:1.45;background:var(--navy2);border-radius:0 0 9px 9px}
 #qmPraUnitMenu .quiz-chapter-menu-row .quiz-chapter-done-cb,
 #praUnitMenu .quiz-chapter-menu-row .quiz-chapter-done-cb{accent-color:var(--amber2)}
 .quiz-chapter-count{flex:0 0 auto;font-size:14px;font-weight:500;color:var(--teal3);white-space:nowrap;min-height:1.4em}
@@ -488,6 +494,11 @@ html[data-time-theme="day"] .qjsonid{border-color:rgba(186,117,23,0.4);backgroun
 html[data-time-theme="day"] .quiz-chapter-count{color:var(--teal2)}
 html[data-time-theme="day"] .quiz-chapter-trigger,
 html[data-time-theme="day"] .quiz-chapter-menu{background:var(--navy3);color:var(--white);border-color:var(--border)}
+html[data-time-theme="day"] #catChapterMenu .quiz-chapter-menu-footer,
+html[data-time-theme="day"] #mesUnitMenu .quiz-chapter-menu-footer,
+html[data-time-theme="day"] #qmMesUnitMenu .quiz-chapter-menu-footer,
+html[data-time-theme="day"] #praUnitMenu .quiz-chapter-menu-footer,
+html[data-time-theme="day"] #qmPraUnitMenu .quiz-chapter-menu-footer{background:var(--navy3)}
 html[data-time-theme="day"] .quiz-chapter-item:hover,
 html[data-time-theme="day"] .quiz-chapter-item:focus{background:rgba(0,0,0,0.06);color:var(--white)}
 #praUnitMenu .quiz-chapter-item.yli-agent-unit,
@@ -599,6 +610,7 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
   <div class="logo">ο χρόνος <span>είναι χρήμα</span></div>
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="go('quiz')">Αρχική</button>
+    <button class="nav-tab" onclick="go('yli')" title="Τράπεζα θεμάτων κεφαλαιαγοράς (ΤτΕ)">Τράπεζα θεμάτων κεφαλαιαγοράς</button>
   </div>
   <div class="theme-ctl" id="themeCtl" role="slider" tabindex="0" aria-label="Φόντο εφαρμογής" aria-describedby="themeHelpDesc" aria-valuemin="0" aria-valuemax="2" aria-valuenow="1" aria-valuetext="Αυτόματα ανά ώρα" aria-orientation="horizontal">
     <span id="themeHelpDesc" class="theme-sr">Σύρετε ή πατήστε: αριστερά ημέρα, μέση αυτόματο ανά ώρα, δεξιά νύχτα. Μετά από μία ώρα χωρίς αλλαγή επανέρχεται στο αυτόματο.</span>
@@ -634,7 +646,7 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
     <div class="stat-card"><div class="stat-num" id="statPartCount" style="color:var(--amber3)">4</div><div class="stat-lbl">Ενότητες</div></div>
   </div>
   <div class="slbl">Ενότητες Μαθήματος</div>
-  <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:-6px 0 14px">Οι τέσσερις ενότητες οργανώνουν την ύλη και τα κεφάλαια· το <strong>Quiz</strong> (tab Αρχική) περιλαμβάνει Unit Linked ΤτΕ και την τράπεζα <strong>ασφαλιστικού πράκτορα</strong>.</p>
+  <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:-6px 0 14px">Οι τέσσερις ενότητες οργανώνουν την ύλη και τα κεφάλαια· το <strong>Quiz</strong> (tab Αρχική) περιλαμβάνει Unit Linked ΤτΕ και τις τράπεζες ασφαλίσεων (μεσίτης, πράκτορας). Η καρτέλα <strong>Τράπεζα θεμάτων κεφαλαιαγοράς</strong> περιέχει μόνο την ύλη κεφαλαιαγοράς (αρχεία ΤτΕ).</p>
   <div class="pgrid">
     <div class="pcard" onclick="go('chapters')"><div class="picon teal">Α</div><div class="badge teal">Μέρος Α</div><div class="pname">Φιλοσοφία Αξίας</div><div class="pdesc">Αξία, επιτόκιο, χρόνος</div></div>
     <div class="pcard" onclick="go('chapters')"><div class="picon blue">Β</div><div class="badge blue">Μέρος Β</div><div class="pname">Μαθηματικά Εργαλεία</div><div class="pdesc">Τύποι, ράντες, NPV, IRR</div></div>
@@ -984,6 +996,33 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
     <p class="rreview" id="qReviewHint"></p>
     <button type="button" class="btn-p" id="qRetryWrongBtn" style="display:none;margin-bottom:10px" onclick="retryWrongQuestions()">↻ Επανάληψη μόνο των λανθασμένων</button>
     <button class="btn-p" onclick="backToQuizStart()">← Επιστροφή στο μενού</button>
+  </div>
+</div>
+
+<!-- Τράπεζα θεμάτων κεφαλαιαγοράς: αρχεία ΤτΕ ανά θεματική ενότητα, σειρά όπως στο Excel (χωρίς ανακάτεμα) -->
+<div id="s-yli" class="screen">
+  <div id="yliBrowse">
+    <div class="quiz-screen-title">Τράπεζα θεμάτων κεφαλαιαγοράς</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px">Μόνο <strong>κεφαλαιαγορά</strong> (όπως στον φάκελο «Τράπεζα Ελλάδος»). Οι τράπεζες <strong>μεσίτη</strong> και <strong>πράκτορα ασφαλίσεων</strong> είναι στην <strong>Αρχική</strong> (ξεχωριστές κάρτες) και στο <strong>Quiz</strong>. Κάθε αρχείο: ερωτήσεις και <strong>α, β, γ, δ</strong> με τη σειρά του Excel (χωρίς ανακάτεμα). Δεν αντικαθιστά το Quiz.</p>
+    <div id="yliLoadErr" class="quiz-load-err" style="display:none"></div>
+    <div class="slbl" style="margin-bottom:10px">Κατηγορίες</div>
+    <div id="yliCatMount" class="parts-list"></div>
+  </div>
+  <div id="yliRun" style="display:none">
+    <div class="yli-run-title quiz-screen-title" id="yliRunTitle" style="font-size:20px;margin-bottom:8px"></div>
+    <p class="quiz-hint" id="yliRunHint" style="margin-bottom:16px;font-size:12px"></p>
+    <div class="qprow">
+      <div class="qpbar" style="flex:1"><div class="qpfill" id="yliFill" style="width:0%"></div></div>
+      <div class="qplbl" id="yliLbl">1/1</div>
+    </div>
+    <div id="yliArea"></div>
+    <div class="qnav" id="yliNav">
+      <button type="button" class="btn-s" onclick="yliBackToBrowse()">← Κατάλογος</button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button type="button" class="btn-s" id="yliNavPrev" onclick="yliPrev()" style="display:none">← Προηγούμενο</button>
+        <button type="button" class="btn-p" id="yliNavNext" onclick="yliNext()" style="display:none">Επόμενο →</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1806,6 +1845,43 @@ function updateCatChapterCount(){
   setCatChapterCountTextForValue(sel.value);
 }
 
+function updateCatChapterCheckedSum(){
+  const foot=document.getElementById("catChapterCheckedSum");
+  if(!foot||!QBANK||!Array.isArray(QBANK.questions))return;
+  const menu=document.getElementById("catChapterMenu");
+  if(!menu)return;
+  let sum=0;
+  menu.querySelectorAll(".quiz-chapter-menu-row").forEach(row=>{
+    const cb=row.querySelector(".quiz-chapter-done-cb");
+    const btn=row.querySelector(".quiz-chapter-item");
+    if(!cb||!cb.checked||!btn)return;
+    const ch=btn.dataset.chapter;
+    if(ch)sum+=countQuestionsForChapter(ch);
+  });
+  const tot=QBANK.questions.length;
+  foot.textContent=`Τσεκαρισμένες ερωτήσεις · ${sum} / ${tot}`;
+}
+
+function unitPickerCheckedSumFooterId(menuId){
+  return String(menuId||"").replace(/Menu$/,"CheckedSum");
+}
+
+function updateUnitPickerCheckedSum(menuEl,rows,footerId){
+  const foot=document.getElementById(footerId);
+  if(!foot||!menuEl)return;
+  if(!rows||!rows.length){foot.textContent="";return;}
+  let sum=0;
+  menuEl.querySelectorAll(".quiz-chapter-menu-row").forEach(row=>{
+    const cb=row.querySelector(".quiz-chapter-done-cb");
+    const btn=row.querySelector(".quiz-chapter-item");
+    if(!cb||!cb.checked||!btn)return;
+    const idx=+btn.dataset.mesIdx;
+    if(Number.isFinite(idx)&&rows[idx])sum+=rows[idx].count||0;
+  });
+  const tot=rows.reduce((s,r)=>s+(r.count||0),0);
+  foot.textContent=`Τσεκαρισμένες ερωτήσεις · ${sum} / ${tot}`;
+}
+
 function syncCatChapterTriggerLabel(){
   const sel=document.getElementById("catChapter");
   const trig=document.getElementById("catChapterTrigger");
@@ -1844,6 +1920,7 @@ function openCatChapterMenu(){
   if(!menu||!trig)return;
   menu.hidden=false;
   trig.setAttribute("aria-expanded","true");
+  updateCatChapterCheckedSum();
   requestAnimationFrame(()=>document.addEventListener("click",catChapterOutsideClose,true));
 }
 
@@ -1905,6 +1982,9 @@ function populateChapterSelect(){
   if(last!==null&&[...sel.options].some(o=>o.value===last))sel.value=last;
   else sel.value=PROMPT;
   menu.innerHTML="";
+  const scroll=document.createElement("div");
+  scroll.className="quiz-chapter-menu-scroll";
+  menu.appendChild(scroll);
   const addItem=(value,label,withMark)=>{
     const n=countQuestionsForChapter(value);
     const row=document.createElement("div");
@@ -1935,7 +2015,10 @@ function populateChapterSelect(){
       cb.setAttribute("aria-label","Σημείωση: ολοκληρώθηκε");
       cb.checked=ulChapterIsRead(value);
       cb.addEventListener("click",e=>e.stopPropagation());
-      cb.addEventListener("change",()=>ulChapterSetRead(value,cb.checked));
+      cb.addEventListener("change",()=>{
+        ulChapterSetRead(value,cb.checked);
+        updateCatChapterCheckedSum();
+      });
       row.appendChild(cb);
     }else{
       const sp=document.createElement("span");
@@ -1943,10 +2026,17 @@ function populateChapterSelect(){
       sp.setAttribute("aria-hidden","true");
       row.appendChild(sp);
     }
-    menu.appendChild(row);
+    scroll.appendChild(row);
   };
   addItem("","Όλα τα κεφάλαια",false);
   chaps.forEach(c=>addItem(c,chapterDisplayLabel(c),true));
+  const foot=document.createElement("div");
+  foot.id="catChapterCheckedSum";
+  foot.className="quiz-chapter-menu-footer";
+  foot.setAttribute("role","note");
+  foot.setAttribute("aria-live","polite");
+  menu.appendChild(foot);
+  updateCatChapterCheckedSum();
   syncCatChapterTriggerLabel();
   refreshCatChapterAriaSelected();
   updateCatChapterCount();
@@ -2228,7 +2318,7 @@ function insuranceQuizYliExit(){
   yliBackToBrowse();
 }
 
-/* ——— Ασφαλιστικός πράκτορας: insurance_agent_yli/ (AE007) ——— */
+/* ——— Τράπεζα θεμάτων / ύλη: κοινή μηχανή (κεφαλαιαγορά: yli/ · μεσίτης: insurance_yli/ · πράκτορας: insurance_agent_yli/) ——— */
 function insuranceAgentCtx(ctx){
   return ctx===YLI_CTX_AGENT||ctx===YLI_CTX_AGENT_QUIZ;
 }
@@ -2432,6 +2522,9 @@ function openMesUnitMenuFor(cfg){
   menu.hidden=false;
   trig.setAttribute("aria-expanded","true");
   activeMesMenuCfg=cfg;
+  const fid=unitPickerCheckedSumFooterId(cfg.menu);
+  if(cfg.menu==="mesUnitMenu"||cfg.menu==="qmMesUnitMenu")updateUnitPickerCheckedSum(menu,MESITIS_UNIT_PICK_ROWS,fid);
+  else if(cfg.menu==="praUnitMenu"||cfg.menu==="qmPraUnitMenu")updateUnitPickerCheckedSum(menu,PRA_UNIT_PICK_ROWS,fid);
   requestAnimationFrame(()=>document.addEventListener("click",dismissMesMenuOutside,true));
 }
 
@@ -2550,6 +2643,10 @@ function populatePraktorasUnitPicker(){
     if(lastIdx!==null&&lastIdx!==""&&PRA_UNIT_PICK_ROWS[+lastIdx])sel.value=lastIdx;
     else sel.value="";
     menu.innerHTML="";
+    const scroll=document.createElement("div");
+    scroll.className="quiz-chapter-menu-scroll";
+    menu.appendChild(scroll);
+    const footId=unitPickerCheckedSumFooterId(pick.menu);
     const addItem=(idx,label)=>{
       const r=PRA_UNIT_PICK_ROWS[idx];
       const n=r?r.count:0;
@@ -2581,11 +2678,21 @@ function populatePraktorasUnitPicker(){
       const markKey=r?r.title:"";
       cb.checked=!!r&&praUnitIsRead(markKey);
       cb.addEventListener("click",e=>e.stopPropagation());
-      cb.addEventListener("change",()=>{if(r)praUnitSetRead(markKey,cb.checked);});
+      cb.addEventListener("change",()=>{
+        if(r)praUnitSetRead(markKey,cb.checked);
+        updateUnitPickerCheckedSum(menu,PRA_UNIT_PICK_ROWS,footId);
+      });
       row.appendChild(cb);
-      menu.appendChild(row);
+      scroll.appendChild(row);
     };
     PRA_UNIT_PICK_ROWS.forEach((r,i)=>addItem(i,r.title));
+    const foot=document.createElement("div");
+    foot.id=footId;
+    foot.className="quiz-chapter-menu-footer";
+    foot.setAttribute("role","note");
+    foot.setAttribute("aria-live","polite");
+    menu.appendChild(foot);
+    updateUnitPickerCheckedSum(menu,PRA_UNIT_PICK_ROWS,footId);
     syncPraUnitTriggerLabel(pick);
     refreshPraUnitAriaSelected(pick);
     if(PRA_UNIT_PICK_ROWS.length&&sel.value!=="")setPraUnitCountForIndex(+sel.value,pick);
