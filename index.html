@@ -250,12 +250,6 @@ canvas{width:100%;display:block}
 .quiz-chapter-menu-row .quiz-chapter-item{flex:1;min-width:0;text-align:left}
 .quiz-chapter-menu-row .quiz-chapter-done-cb{flex:0 0 auto;width:18px;height:18px;margin:0 6px 0 0;cursor:pointer;accent-color:var(--teal3)}
 .quiz-chapter-menu-row .quiz-chapter-done-spacer{flex:0 0 auto;width:18px;height:18px;margin:0 6px 0 0;visibility:hidden;pointer-events:none}
-#catChapterMenu.quiz-chapter-menu{display:flex;flex-direction:column;padding:0;max-height:min(320px,60vh);overflow:hidden}
-#catChapterMenu .quiz-chapter-menu-scroll{overflow-y:auto;min-height:0;flex:1;padding:6px 0}
-#catChapterMenu .quiz-chapter-menu-footer{flex-shrink:0;border-top:1px solid var(--border);padding:8px 12px 10px;font-size:11px;color:var(--muted);line-height:1.45;background:var(--navy2);border-radius:0 0 9px 9px}
-#mesUnitMenu.quiz-chapter-menu,#qmMesUnitMenu.quiz-chapter-menu,#praUnitMenu.quiz-chapter-menu,#qmPraUnitMenu.quiz-chapter-menu{display:flex;flex-direction:column;padding:0;max-height:min(320px,60vh);overflow:hidden}
-#mesUnitMenu .quiz-chapter-menu-scroll,#qmMesUnitMenu .quiz-chapter-menu-scroll,#praUnitMenu .quiz-chapter-menu-scroll,#qmPraUnitMenu .quiz-chapter-menu-scroll{overflow-y:auto;min-height:0;flex:1;padding:6px 0}
-#mesUnitMenu .quiz-chapter-menu-footer,#qmMesUnitMenu .quiz-chapter-menu-footer,#praUnitMenu .quiz-chapter-menu-footer,#qmPraUnitMenu .quiz-chapter-menu-footer{flex-shrink:0;border-top:1px solid var(--border);padding:8px 12px 10px;font-size:11px;color:var(--muted);line-height:1.45;background:var(--navy2);border-radius:0 0 9px 9px}
 #qmPraUnitMenu .quiz-chapter-menu-row .quiz-chapter-done-cb,
 #praUnitMenu .quiz-chapter-menu-row .quiz-chapter-done-cb{accent-color:var(--amber2)}
 .quiz-chapter-count{flex:0 0 auto;font-size:14px;font-weight:500;color:var(--teal3);white-space:nowrap;min-height:1.4em}
@@ -494,11 +488,6 @@ html[data-time-theme="day"] .qjsonid{border-color:rgba(186,117,23,0.4);backgroun
 html[data-time-theme="day"] .quiz-chapter-count{color:var(--teal2)}
 html[data-time-theme="day"] .quiz-chapter-trigger,
 html[data-time-theme="day"] .quiz-chapter-menu{background:var(--navy3);color:var(--white);border-color:var(--border)}
-html[data-time-theme="day"] #catChapterMenu .quiz-chapter-menu-footer,
-html[data-time-theme="day"] #mesUnitMenu .quiz-chapter-menu-footer,
-html[data-time-theme="day"] #qmMesUnitMenu .quiz-chapter-menu-footer,
-html[data-time-theme="day"] #praUnitMenu .quiz-chapter-menu-footer,
-html[data-time-theme="day"] #qmPraUnitMenu .quiz-chapter-menu-footer{background:var(--navy3)}
 html[data-time-theme="day"] .quiz-chapter-item:hover,
 html[data-time-theme="day"] .quiz-chapter-item:focus{background:rgba(0,0,0,0.06);color:var(--white)}
 #praUnitMenu .quiz-chapter-item.yli-agent-unit,
@@ -1817,43 +1806,6 @@ function updateCatChapterCount(){
   setCatChapterCountTextForValue(sel.value);
 }
 
-function updateCatChapterCheckedSum(){
-  const foot=document.getElementById("catChapterCheckedSum");
-  if(!foot||!QBANK||!Array.isArray(QBANK.questions))return;
-  const menu=document.getElementById("catChapterMenu");
-  if(!menu)return;
-  let sum=0;
-  menu.querySelectorAll(".quiz-chapter-menu-row").forEach(row=>{
-    const cb=row.querySelector(".quiz-chapter-done-cb");
-    const btn=row.querySelector(".quiz-chapter-item");
-    if(!cb||!cb.checked||!btn)return;
-    const ch=btn.dataset.chapter;
-    if(ch)sum+=countQuestionsForChapter(ch);
-  });
-  const tot=QBANK.questions.length;
-  foot.textContent=`Τσεκαρισμένες ερωτήσεις · ${sum} / ${tot}`;
-}
-
-function unitPickerCheckedSumFooterId(menuId){
-  return String(menuId||"").replace(/Menu$/,"CheckedSum");
-}
-
-function updateUnitPickerCheckedSum(menuEl,rows,footerId){
-  const foot=document.getElementById(footerId);
-  if(!foot||!menuEl)return;
-  if(!rows||!rows.length){foot.textContent="";return;}
-  let sum=0;
-  menuEl.querySelectorAll(".quiz-chapter-menu-row").forEach(row=>{
-    const cb=row.querySelector(".quiz-chapter-done-cb");
-    const btn=row.querySelector(".quiz-chapter-item");
-    if(!cb||!cb.checked||!btn)return;
-    const idx=+btn.dataset.mesIdx;
-    if(Number.isFinite(idx)&&rows[idx])sum+=rows[idx].count||0;
-  });
-  const tot=rows.reduce((s,r)=>s+(r.count||0),0);
-  foot.textContent=`Τσεκαρισμένες ερωτήσεις · ${sum} / ${tot}`;
-}
-
 function syncCatChapterTriggerLabel(){
   const sel=document.getElementById("catChapter");
   const trig=document.getElementById("catChapterTrigger");
@@ -1892,7 +1844,6 @@ function openCatChapterMenu(){
   if(!menu||!trig)return;
   menu.hidden=false;
   trig.setAttribute("aria-expanded","true");
-  updateCatChapterCheckedSum();
   requestAnimationFrame(()=>document.addEventListener("click",catChapterOutsideClose,true));
 }
 
@@ -1954,9 +1905,6 @@ function populateChapterSelect(){
   if(last!==null&&[...sel.options].some(o=>o.value===last))sel.value=last;
   else sel.value=PROMPT;
   menu.innerHTML="";
-  const scroll=document.createElement("div");
-  scroll.className="quiz-chapter-menu-scroll";
-  menu.appendChild(scroll);
   const addItem=(value,label,withMark)=>{
     const n=countQuestionsForChapter(value);
     const row=document.createElement("div");
@@ -1987,10 +1935,7 @@ function populateChapterSelect(){
       cb.setAttribute("aria-label","Σημείωση: ολοκληρώθηκε");
       cb.checked=ulChapterIsRead(value);
       cb.addEventListener("click",e=>e.stopPropagation());
-      cb.addEventListener("change",()=>{
-        ulChapterSetRead(value,cb.checked);
-        updateCatChapterCheckedSum();
-      });
+      cb.addEventListener("change",()=>{ulChapterSetRead(value,cb.checked);});
       row.appendChild(cb);
     }else{
       const sp=document.createElement("span");
@@ -1998,17 +1943,10 @@ function populateChapterSelect(){
       sp.setAttribute("aria-hidden","true");
       row.appendChild(sp);
     }
-    scroll.appendChild(row);
+    menu.appendChild(row);
   };
   addItem("","Όλα τα κεφάλαια",false);
   chaps.forEach(c=>addItem(c,chapterDisplayLabel(c),true));
-  const foot=document.createElement("div");
-  foot.id="catChapterCheckedSum";
-  foot.className="quiz-chapter-menu-footer";
-  foot.setAttribute("role","note");
-  foot.setAttribute("aria-live","polite");
-  menu.appendChild(foot);
-  updateCatChapterCheckedSum();
   syncCatChapterTriggerLabel();
   refreshCatChapterAriaSelected();
   updateCatChapterCount();
@@ -2285,8 +2223,6 @@ function quizExit(){
 function insuranceQuizYliExit(){
   if(yliAct!==YLI_CTX_AGENT_QUIZ)return;
   if(!confirm("Θέλεις να τερματίσεις την εξάσκηση; Θα επιστρέψεις στην επιλογή ενότητας."))return;
-  yliTtsChainActive=false;
-  if(yliTtsPlaying){ttsUserStopYli();yliTtsPlaying=false;}
   yliBackToBrowse();
 }
 
@@ -2494,9 +2430,6 @@ function openMesUnitMenuFor(cfg){
   menu.hidden=false;
   trig.setAttribute("aria-expanded","true");
   activeMesMenuCfg=cfg;
-  const fid=unitPickerCheckedSumFooterId(cfg.menu);
-  if(cfg.menu==="mesUnitMenu"||cfg.menu==="qmMesUnitMenu")updateUnitPickerCheckedSum(menu,MESITIS_UNIT_PICK_ROWS,fid);
-  else if(cfg.menu==="praUnitMenu"||cfg.menu==="qmPraUnitMenu")updateUnitPickerCheckedSum(menu,PRA_UNIT_PICK_ROWS,fid);
   requestAnimationFrame(()=>document.addEventListener("click",dismissMesMenuOutside,true));
 }
 
@@ -2615,10 +2548,6 @@ function populatePraktorasUnitPicker(){
     if(lastIdx!==null&&lastIdx!==""&&PRA_UNIT_PICK_ROWS[+lastIdx])sel.value=lastIdx;
     else sel.value="";
     menu.innerHTML="";
-    const scroll=document.createElement("div");
-    scroll.className="quiz-chapter-menu-scroll";
-    menu.appendChild(scroll);
-    const footId=unitPickerCheckedSumFooterId(pick.menu);
     const addItem=(idx,label)=>{
       const r=PRA_UNIT_PICK_ROWS[idx];
       const n=r?r.count:0;
@@ -2650,21 +2579,11 @@ function populatePraktorasUnitPicker(){
       const markKey=r?r.title:"";
       cb.checked=!!r&&praUnitIsRead(markKey);
       cb.addEventListener("click",e=>e.stopPropagation());
-      cb.addEventListener("change",()=>{
-        if(r)praUnitSetRead(markKey,cb.checked);
-        updateUnitPickerCheckedSum(menu,PRA_UNIT_PICK_ROWS,footId);
-      });
+      cb.addEventListener("change",()=>{if(r)praUnitSetRead(markKey,cb.checked);});
       row.appendChild(cb);
-      scroll.appendChild(row);
+      menu.appendChild(row);
     };
     PRA_UNIT_PICK_ROWS.forEach((r,i)=>addItem(i,r.title));
-    const foot=document.createElement("div");
-    foot.id=footId;
-    foot.className="quiz-chapter-menu-footer";
-    foot.setAttribute("role","note");
-    foot.setAttribute("aria-live","polite");
-    menu.appendChild(foot);
-    updateUnitPickerCheckedSum(menu,PRA_UNIT_PICK_ROWS,footId);
     syncPraUnitTriggerLabel(pick);
     refreshPraUnitAriaSelected(pick);
     if(PRA_UNIT_PICK_ROWS.length&&sel.value!=="")setPraUnitCountForIndex(+sel.value,pick);
