@@ -610,7 +610,6 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
   <div class="logo">ο χρόνος <span>είναι χρήμα</span></div>
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="go('quiz')">Αρχική</button>
-    <button class="nav-tab" onclick="go('yli')" title="Τράπεζα θεμάτων κεφαλαιαγοράς (ΤτΕ)">Τράπεζα θεμάτων κεφαλαιαγοράς</button>
   </div>
   <div class="theme-ctl" id="themeCtl" role="slider" tabindex="0" aria-label="Φόντο εφαρμογής" aria-describedby="themeHelpDesc" aria-valuemin="0" aria-valuemax="2" aria-valuenow="1" aria-valuetext="Αυτόματα ανά ώρα" aria-orientation="horizontal">
     <span id="themeHelpDesc" class="theme-sr">Σύρετε ή πατήστε: αριστερά ημέρα, μέση αυτόματο ανά ώρα, δεξιά νύχτα. Μετά από μία ώρα χωρίς αλλαγή επανέρχεται στο αυτόματο.</span>
@@ -646,7 +645,7 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
     <div class="stat-card"><div class="stat-num" id="statPartCount" style="color:var(--amber3)">4</div><div class="stat-lbl">Ενότητες</div></div>
   </div>
   <div class="slbl">Ενότητες Μαθήματος</div>
-  <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:-6px 0 14px">Οι τέσσερις ενότητες οργανώνουν την ύλη και τα κεφάλαια· το <strong>Quiz</strong> (tab Αρχική) περιλαμβάνει Unit Linked ΤτΕ και τις τράπεζες ασφαλίσεων (μεσίτης, πράκτορας). Η καρτέλα <strong>Τράπεζα θεμάτων κεφαλαιαγοράς</strong> περιέχει μόνο την ύλη κεφαλαιαγοράς (αρχεία ΤτΕ).</p>
+  <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:-6px 0 14px">Οι τέσσερις ενότητες οργανώνουν την ύλη και τα κεφάλαια· το <strong>Quiz</strong> (tab Αρχική) περιλαμβάνει Unit Linked ΤτΕ και την τράπεζα <strong>ασφαλιστικού πράκτορα</strong>.</p>
   <div class="pgrid">
     <div class="pcard" onclick="go('chapters')"><div class="picon teal">Α</div><div class="badge teal">Μέρος Α</div><div class="pname">Φιλοσοφία Αξίας</div><div class="pdesc">Αξία, επιτόκιο, χρόνος</div></div>
     <div class="pcard" onclick="go('chapters')"><div class="picon blue">Β</div><div class="badge blue">Μέρος Β</div><div class="pname">Μαθηματικά Εργαλεία</div><div class="pdesc">Τύποι, ράντες, NPV, IRR</div></div>
@@ -996,33 +995,6 @@ html[data-time-theme="day"] .theme-ctl:hover .theme-thumb{
     <p class="rreview" id="qReviewHint"></p>
     <button type="button" class="btn-p" id="qRetryWrongBtn" style="display:none;margin-bottom:10px" onclick="retryWrongQuestions()">↻ Επανάληψη μόνο των λανθασμένων</button>
     <button class="btn-p" onclick="backToQuizStart()">← Επιστροφή στο μενού</button>
-  </div>
-</div>
-
-<!-- Τράπεζα θεμάτων κεφαλαιαγοράς: αρχεία ΤτΕ ανά θεματική ενότητα, σειρά όπως στο Excel (χωρίς ανακάτεμα) -->
-<div id="s-yli" class="screen">
-  <div id="yliBrowse">
-    <div class="quiz-screen-title">Τράπεζα θεμάτων κεφαλαιαγοράς</div>
-    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px">Μόνο <strong>κεφαλαιαγορά</strong> (όπως στον φάκελο «Τράπεζα Ελλάδος»). Οι τράπεζες <strong>μεσίτη</strong> και <strong>πράκτορα ασφαλίσεων</strong> είναι στην <strong>Αρχική</strong> (ξεχωριστές κάρτες) και στο <strong>Quiz</strong>. Κάθε αρχείο: ερωτήσεις και <strong>α, β, γ, δ</strong> με τη σειρά του Excel (χωρίς ανακάτεμα). Δεν αντικαθιστά το Quiz.</p>
-    <div id="yliLoadErr" class="quiz-load-err" style="display:none"></div>
-    <div class="slbl" style="margin-bottom:10px">Κατηγορίες</div>
-    <div id="yliCatMount" class="parts-list"></div>
-  </div>
-  <div id="yliRun" style="display:none">
-    <div class="yli-run-title quiz-screen-title" id="yliRunTitle" style="font-size:20px;margin-bottom:8px"></div>
-    <p class="quiz-hint" id="yliRunHint" style="margin-bottom:16px;font-size:12px"></p>
-    <div class="qprow">
-      <div class="qpbar" style="flex:1"><div class="qpfill" id="yliFill" style="width:0%"></div></div>
-      <div class="qplbl" id="yliLbl">1/1</div>
-    </div>
-    <div id="yliArea"></div>
-    <div class="qnav" id="yliNav">
-      <button type="button" class="btn-s" onclick="yliBackToBrowse()">← Κατάλογος</button>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button type="button" class="btn-s" id="yliNavPrev" onclick="yliPrev()" style="display:none">← Προηγούμενο</button>
-        <button type="button" class="btn-p" id="yliNavNext" onclick="yliNext()" style="display:none">Επόμενο →</button>
-      </div>
-    </div>
   </div>
 </div>
 
