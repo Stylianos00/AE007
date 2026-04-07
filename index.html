@@ -243,6 +243,7 @@ canvas{width:100%;display:block}
 .quiz-chapter-trigger{width:100%;text-align:left;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--navy3);color:var(--white);font-family:"DM Sans",sans-serif;font-size:14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .quiz-chapter-trigger::after{content:"▾";opacity:.55;font-size:11px;flex-shrink:0}
 .quiz-chapter-menu{position:absolute;left:0;right:0;top:calc(100% + 5px);z-index:80;max-height:min(300px,55vh);overflow-y:auto;background:var(--navy2);border:1px solid var(--border);border-radius:10px;box-shadow:0 16px 40px rgba(0,0,0,0.35);padding:6px 0}
+.quiz-chapter-menu-footer{margin:0;padding:10px 10px 8px 12px;border-top:1px solid var(--border);background:var(--navy2);font-size:12px;line-height:1.35;color:var(--muted);position:sticky;bottom:0;z-index:2;text-align:right}
 .quiz-chapter-item{display:block;width:100%;text-align:left;padding:10px 14px;border:none;background:transparent;color:var(--gray);font-family:"DM Sans",sans-serif;font-size:14px;cursor:pointer;line-height:1.35}
 .quiz-chapter-item:hover,.quiz-chapter-item:focus{background:rgba(255,255,255,0.08);color:var(--white);outline:none}
 .quiz-chapter-item[aria-selected="true"]{background:rgba(29,158,117,0.14);color:var(--teal3)}
@@ -487,7 +488,9 @@ html[data-time-theme="day"] .gloss-search{background:var(--navy3);color:var(--wh
 html[data-time-theme="day"] .qjsonid{border-color:rgba(186,117,23,0.4);background:rgba(186,117,23,0.14);color:var(--amber2)}
 html[data-time-theme="day"] .quiz-chapter-count{color:var(--teal2)}
 html[data-time-theme="day"] .quiz-chapter-trigger,
-html[data-time-theme="day"] .quiz-chapter-menu{background:var(--navy3);color:var(--white);border-color:var(--border)}
+html[data-time-theme="day"] .quiz-chapter-menu,
+html[data-time-theme="day"] .quiz-chapter-menu-footer{background:var(--navy3);color:var(--white);border-color:var(--border)}
+html[data-time-theme="day"] .quiz-chapter-menu-footer{border-top-color:var(--border)}
 html[data-time-theme="day"] .quiz-chapter-item:hover,
 html[data-time-theme="day"] .quiz-chapter-item:focus{background:rgba(0,0,0,0.06);color:var(--white)}
 #praUnitMenu .quiz-chapter-item.yli-agent-unit,
@@ -1782,6 +1785,64 @@ function praUnitSetRead(title,on){
 }
 function praUnitIsRead(title){return !!praUnitReadMap()[title];}
 
+function insuranceBankTotalQuestionCount(rows){
+  if(!rows||!rows.length)return 0;
+  const first=rows[0];
+  return first&&Number(first.count)>0?Number(first.count):0;
+}
+function insuranceBankCheckedQuestionSum(rows,map){
+  if(!rows||!rows.length)return 0;
+  const bankTotal=insuranceBankTotalQuestionCount(rows);
+  const first=rows[0];
+  if(first&&first.title&&map[first.title]){
+    const n=Number(first.count)||0;
+    return bankTotal>0?Math.min(n,bankTotal):n;
+  }
+  let s=0;
+  for(let i=1;i<rows.length;i++){
+    const r=rows[i];
+    if(r&&r.title&&map[r.title])s+=Number(r.count)||0;
+  }
+  return bankTotal>0?Math.min(s,bankTotal):s;
+}
+function appendQuizChapterMenuFooter(menu,elementId){
+  if(!menu)return;
+  let foot=document.getElementById(elementId);
+  if(!foot){
+    foot=document.createElement("p");
+    foot.id=elementId;
+    foot.className="quiz-checked-footer quiz-chapter-menu-footer";
+    foot.setAttribute("role","status");
+    foot.setAttribute("aria-live","polite");
+  }
+  menu.appendChild(foot);
+}
+
+function updateQuizHomeCheckedFooters(){
+  const ulFoot=document.getElementById("quizUlCheckedFooter");
+  if(ulFoot){
+    let checked=0,total=0;
+    if(QBANK&&Array.isArray(QBANK.questions)){
+      const chaps=[...new Set(QBANK.questions.map(q=>q.chapter))].sort(compareChapterCodes);
+      const m=ulChapterReadMap();
+      for(let i=0;i<chaps.length;i++){
+        const c=chaps[i];
+        if(m[c])checked+=countQuestionsForChapter(c);
+      }
+      total=QBANK.questions.length;
+      if(total>0)checked=Math.min(checked,total);
+    }
+    ulFoot.textContent="Τσεκαρισμένες ερωτήσεις · "+checked+" / "+total;
+  }
+  const praFoot=document.getElementById("quizPraCheckedFooter");
+  if(praFoot&&PRA_UNIT_PICK_ROWS&&PRA_UNIT_PICK_ROWS.length){
+    const pm=praUnitReadMap();
+    const tot=insuranceBankTotalQuestionCount(PRA_UNIT_PICK_ROWS);
+    const checked=insuranceBankCheckedQuestionSum(PRA_UNIT_PICK_ROWS,pm);
+    praFoot.textContent="Τσεκαρισμένες ερωτήσεις · "+checked+" / "+tot;
+  }
+}
+
 function formatQuestionCount(n){
   return n===1?"1 ερώτηση":n+" ερωτήσεις";
 }
@@ -1844,6 +1905,7 @@ function openCatChapterMenu(){
   if(!menu||!trig)return;
   menu.hidden=false;
   trig.setAttribute("aria-expanded","true");
+  updateQuizHomeCheckedFooters();
   requestAnimationFrame(()=>document.addEventListener("click",catChapterOutsideClose,true));
 }
 
@@ -1935,7 +1997,7 @@ function populateChapterSelect(){
       cb.setAttribute("aria-label","Σημείωση: ολοκληρώθηκε");
       cb.checked=ulChapterIsRead(value);
       cb.addEventListener("click",e=>e.stopPropagation());
-      cb.addEventListener("change",()=>{ulChapterSetRead(value,cb.checked);});
+      cb.addEventListener("change",()=>{ulChapterSetRead(value,cb.checked);updateQuizHomeCheckedFooters();});
       row.appendChild(cb);
     }else{
       const sp=document.createElement("span");
@@ -1947,9 +2009,11 @@ function populateChapterSelect(){
   };
   addItem("","Όλα τα κεφάλαια",false);
   chaps.forEach(c=>addItem(c,chapterDisplayLabel(c),true));
+  appendQuizChapterMenuFooter(menu,"quizUlCheckedFooter");
   syncCatChapterTriggerLabel();
   refreshCatChapterAriaSelected();
   updateCatChapterCount();
+  updateQuizHomeCheckedFooters();
 }
 
 function setQuizModeSelection(mode){
@@ -2252,6 +2316,7 @@ function showYliBrowse(){
     const foot=document.getElementById("qmPraktorasFooter");
     if(foot)foot.style.display="flex";
   }
+  if(yliAct===YLI_CTX_AGENT_QUIZ)updateQuizHomeCheckedFooters();
 }
 
 async function loadYliManifestIfNeeded(){
@@ -2430,6 +2495,7 @@ function openMesUnitMenuFor(cfg){
   menu.hidden=false;
   trig.setAttribute("aria-expanded","true");
   activeMesMenuCfg=cfg;
+  updateQuizHomeCheckedFooters();
   requestAnimationFrame(()=>document.addEventListener("click",dismissMesMenuOutside,true));
 }
 
@@ -2524,6 +2590,7 @@ function populatePraktorasUnitPicker(){
       const c=document.getElementById(p.count);
       if(c)c.textContent="—";
     });
+    updateQuizHomeCheckedFooters();
     return;
   }
   PRA_UNIT_PICK_ROWS=insuranceBankExpandRows(file)||[];
@@ -2579,17 +2646,19 @@ function populatePraktorasUnitPicker(){
       const markKey=r?r.title:"";
       cb.checked=!!r&&praUnitIsRead(markKey);
       cb.addEventListener("click",e=>e.stopPropagation());
-      cb.addEventListener("change",()=>{if(r)praUnitSetRead(markKey,cb.checked);});
+      cb.addEventListener("change",()=>{if(r)praUnitSetRead(markKey,cb.checked);updateQuizHomeCheckedFooters();});
       row.appendChild(cb);
       menu.appendChild(row);
     };
     PRA_UNIT_PICK_ROWS.forEach((r,i)=>addItem(i,r.title));
+    if(pick.which==="q")appendQuizChapterMenuFooter(menu,"quizPraCheckedFooter");
     syncPraUnitTriggerLabel(pick);
     refreshPraUnitAriaSelected(pick);
     if(PRA_UNIT_PICK_ROWS.length&&sel.value!=="")setPraUnitCountForIndex(+sel.value,pick);
     else document.getElementById(pick.count).textContent="—";
   });
   initPraktorasUnitPicker();
+  updateQuizHomeCheckedFooters();
 }
 
 function openPraktorasSelectedFromPicker(which){
